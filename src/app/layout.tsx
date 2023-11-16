@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils/ui";
 import { GeistSans } from "geist/font/sans";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
@@ -35,17 +36,17 @@ export const metadata: Metadata = {
     //TODO: add this after hosting
     url: "",
     title: siteConfig.name,
-    images: [`${siteConfig.url}/og.webp`],
-    description: `Retiral is a retirement planning platform that helps you plan for your retirement and achieve your financial goals.`,
-    siteName: "Retiral",
+    images: [`/og.webp`],
+    description: siteConfig.description,
+    siteName: siteConfig.name,
   },
   twitter: {
     //TODO: add this after hosting
     card: "summary_large_image",
-    title: "Retiral",
+    title: siteConfig.name,
     creator: "@NambisanAman",
-    images: ["/og.webp"],
-    description: `Retiral is a retirement planning platform that helps you plan for your retirement and achieve your financial goals.`,
+    images: [`/og.webp`],
+    description: siteConfig.description,
   },
   keywords: [
     "Retirement Planning",
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
     "India money",
     "Paisa",
   ],
-  description: `Retiral is a retirement planning platform that helps you plan for your retirement and achieve your financial goals.`,
+  description: siteConfig.description,
 };
 
 export default function RootLayout({
