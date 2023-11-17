@@ -1,4 +1,3 @@
-import sharukhKhanPose from "@/assets/images/sharukhKhanPose.webp";
 import chasingAfterMoney from "@/assets/images/chasingMoney.webp";
 
 import { Globe, Star } from "lucide-react";

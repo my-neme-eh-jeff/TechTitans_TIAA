@@ -1,11 +1,16 @@
 "use client";
 import Icons from "@/components/icons";
+import { LoginSchema } from "@/lib/validators/register";
+
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
+import { safeParse } from "valibot";
+import { redirect } from "next/navigation";
+import axios from "axios";
 // import toast from "react-hot-toast";
 
 type UserAuthFormProps = {
@@ -37,17 +42,42 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
   };
 
   const hangleLoginWithCredentials = async () => {
+    const isFormDataValid = safeParse(LoginSchema, data);
+    if (!isFormDataValid) {
+      toast.error("Invalid credentials");
+      return;
+    }
+    if (isSignup && data.password !== data.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
     try {
       setIsLoading(true);
-      if (data.password !== data.confirmPassword) {
-        toast.error("Passwords do not match");
-        return;
+      if (isSignup) {
+        const resp = await axios.post("/api/auth/register", data);
+        console.log(resp.data);
+        if (!resp) {
+          toast.error("Server might be offline");
+          return;
+        }
+      } else {
+        const resp = await signIn("credentials", {
+          email: data.email,
+          password: data.password,
+          redirect: false,
+        });
+        if (!resp) {
+          toast.error("Server might be offline");
+          return;
+        }
+        if (resp?.ok) {
+          toast.success(`${isSignup ? "Signed up" : "Logged in"} successfully`);
+          redirect("/dashboard");
+        } else {
+          toast.error("Invalid credentials");
+        }
       }
-      await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-      });
-      toast.success("Logged in successfully");
     } catch (err) {
       console.log(err);
     } finally {

@@ -81,7 +81,7 @@ dependencies:
     specifier: ^2.3.4
     version: 2.3.4
   axios:
-    specifier: ^1.6.0
+    specifier: ^1.6.1
     version: 1.6.1
   bcrypt:
     specifier: ^5.1.1
@@ -104,6 +104,9 @@ dependencies:
   drizzle-orm:
     specifier: ^0.29.0
     version: 0.29.0(pg@8.11.3)(postgres@3.4.3)
+  drizzle-valibot:
+    specifier: ^0.1.1
+    version: 0.1.1(drizzle-orm@0.29.0)
   framer-motion:
     specifier: ^10.16.4
     version: 10.16.4(react-dom@18.2.0)(react@18.2.0)
@@ -5081,6 +5084,14 @@ packages:
     dependencies:
       pg: 8.11.3
       postgres: 3.4.3
+    dev: false
+
+  /drizzle-valibot@0.1.1(drizzle-orm@0.29.0):
+    resolution: {integrity: sha512-xVEGIbZ+Ti5IkGJP1jaUV8kQ7b5RITaH5XYYPSDVOq0blxI3y65efZ0ZAUKSo6BhZ+VqfZfZn1ouPb3pR1hA6g==}
+    peerDependencies:
+      drizzle-orm: '>=0.23.13'
+    dependencies:
+      drizzle-orm: 0.29.0(pg@8.11.3)(postgres@3.4.3)
     dev: false
 
   /edge-runtime@2.5.7:

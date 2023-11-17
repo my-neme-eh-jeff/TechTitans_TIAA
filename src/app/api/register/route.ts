@@ -4,15 +4,18 @@ import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import bcrypt, { genSaltSync } from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
+import { LoginSchema } from "@/lib/validators/register";
+import { safeParse } from "valibot";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { email, password } = body;
-    if (!email || !password) {
+    const isFormDataValid = safeParse(LoginSchema, { email, password });
+    if (!isFormDataValid.success) {
       return NextResponse.json({
         success: false,
-        error: "Email and password required",
+        error: "Invalid data",
       });
     }
     const userExistsOrNot = await db

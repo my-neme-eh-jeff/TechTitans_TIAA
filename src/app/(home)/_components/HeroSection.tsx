@@ -124,7 +124,7 @@ function HeroSection() {
           >
             <Link
               as={NextLink}
-              href={"/signup"}
+              href={"/sign-up"}
               className={buttonStyles({
                 color: "success",
                 radius: "full",

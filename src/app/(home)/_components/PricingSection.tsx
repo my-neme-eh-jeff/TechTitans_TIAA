@@ -150,7 +150,7 @@ function PricingSection() {
                 </h2>
 
                 <p className="mt-2 sm:mt-4">
-                  <strong className="text-3xl font-bold text-stone-800 sm:text-4xl">
+                  <strong className="text-3xl font-bold dark:text-stone-400 text-stone-800 sm:text-4xl">
                     {variant.price}
                   </strong>
 
