@@ -14,7 +14,7 @@ import { Link } from "@nextui-org/link";
 import { Paperclip } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils/ui";
-import { pages } from "@/components/NavLinks";
+import { navbarLinksForDashboardEmployee } from "@/components/NavLinks";
 
 export default function PagesDropDown() {
   const [isDropDownOpen, setisDropDownOpen] = useState(false);
@@ -54,11 +54,11 @@ export default function PagesDropDown() {
           aria-label="Dropdown menu with description"
         >
           <DropdownSection>
-            {pages.map((page) => (
+            {navbarLinksForDashboardEmployee.map((page) => (
               <DropdownItem
                 key={page.title}
-                description={page.description}
-                startContent={page.icon}
+                // description={page.description}
+                // startContent={page.icon}
                 onClick={() => router.push(page.href)}
               >
                 {page.title}
