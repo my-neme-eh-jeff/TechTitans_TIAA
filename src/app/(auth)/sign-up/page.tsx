@@ -2,13 +2,14 @@ import UserAuthForm from "../_components/UserAuthForm";
 import { SVGLineGlowAnimateContainer } from "../_components/LineGlowAnimation";
 import type { Metadata } from "next";
 
+import { Link } from "@nextui-org/link";
 import { BadgeIndianRupee } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Sign Up",
+  title: "Create account",
 };
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
     <>
       <div className="w-full flex overflow-hidden">
@@ -19,10 +20,10 @@ export default function LoginPage() {
                 <div className="flex flex-col space-y-2 text-center mb-6 mt-4">
                   <BadgeIndianRupee className="mx-auto h-10 w-10" />
                   <h1 className="text-2xl font-semibold tracking-tight">
-                    Login
+                    Register
                   </h1>
                 </div>
-                <UserAuthForm />
+                <UserAuthForm isSignup={true}/>
               </div>
               <div className="order-first hidden w-full lg:flex justify-center">
                 <SVGLineGlowAnimateContainer />

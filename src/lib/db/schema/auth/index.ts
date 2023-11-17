@@ -11,7 +11,7 @@ import { users } from "../roleBased";
 export const accounts = pgTable(
   "account",
   {
-    userId: text("user_id")
+    userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccount["type"]>().notNull(),
@@ -27,7 +27,7 @@ export const accounts = pgTable(
   },
   (account) => ({
     compoundKey: primaryKey({
-      columns: [account.provider, account.providerAccountId],
+      columns: [ account.provider, account.providerAccountId],
     }),
   })
 );

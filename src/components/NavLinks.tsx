@@ -27,14 +27,33 @@ export const navLinksForAuth = [
   {
     title: "About us",
     href: "/about",
+    description: "Get to know us better",
+  },
+  {
+    title: "Login",
+    href: "/login",
+    description: "Login to your account",
+  },
+  {
+    title: "Signup",
+    href: "/sign-up",
+    description: "Get started with a free account",
   },
 ];
 export type NavbarLinksForAuthType = (typeof navLinksForAuth)[number]["title"];
 
 export const navbarLinksForDashboardAdmin = [
   {
-    title: "Case History",
-    href: "history",
+    title: "Chatbot",
+    href: "/dashboard/chatbot",
+  },
+  {
+    title: "Company",
+    href: "/dashboard/company",
+  },
+  {
+    title: "Retirement Calculator",
+    href: "/retirement-calculator",
   },
 ] as const;
 export type NavbarLinksForDashboardAdminType =
@@ -42,12 +61,12 @@ export type NavbarLinksForDashboardAdminType =
 
 export const navbarLinksForDashboardEmployee = [
   {
-    title: "Case files",
-    href: "case-files",
+    title: "Chatbot",
+    href: "/dashboard/chatbot",
   },
   {
-    title: "Documents",
-    href: "case-files",
+    title: "Retirement Calculator",
+    href: "/retirement-calculator",
   },
 ] as const;
 export type NavbarLinksForDashboardEmployeeType =

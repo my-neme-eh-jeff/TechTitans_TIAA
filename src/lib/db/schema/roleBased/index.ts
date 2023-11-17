@@ -1,4 +1,4 @@
-import { pgEnum, serial } from "drizzle-orm/pg-core";
+import { decimal, integer, pgEnum, serial } from "drizzle-orm/pg-core";
 import { timestamp, pgTable, text } from "drizzle-orm/pg-core";
 import {
   type InferSelectModel,
@@ -17,8 +17,9 @@ export type roleLiteral = Pick<SelectUser, "role">["role"];
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
-  name: text("name").notNull(),
+  name: text("name"),
   email: text("email").notNull().unique(),
+  password: text("password"),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
   createdAt: timestamp("created_at", { mode: "date", withTimezone: true })
@@ -45,6 +46,16 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   }),
 }));
 
+export const safetyEnum = pgEnum("safety", [
+  "Cautious",
+  "Middle-of-the-road",
+  "Daring",
+]);
+export const typeOfRetirementEnum = pgEnum("typeOfRetirement", [
+  "Like a king/queen",
+  "I am happy the way i am",
+  "Like a monk",
+]);
 export const profile = pgTable("profile", {
   id: serial("id").notNull().primaryKey(),
   userId: text("user_id")
@@ -54,6 +65,14 @@ export const profile = pgTable("profile", {
   role: text("role").notNull(),
   phone: text("phone").notNull(),
   email: text("email").notNull(),
+
+  salary: decimal("salary", { precision: 12, scale: 2 }).notNull(),
+  workExperience: integer("work_experience").notNull(),
+  age: integer("age").notNull(),
+  goalRetirementAge: integer("goal_retirement_age").notNull(),
+  safetyInRetirement: safetyEnum("safety_in_retirement").notNull(),
+  typeOfRetirement: typeOfRetirementEnum("type_of_retirement").notNull(),
+
   createdAt: timestamp("created_at", { mode: "date", withTimezone: true })
     .notNull()
     .defaultNow(),

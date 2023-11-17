@@ -14,8 +14,7 @@ import NextLink from "next/link";
 import { BadgeIndianRupee } from "lucide-react";
 
 export default async function Navbar() {
-
-    return (
+  return (
     <NextUINavbar maxWidth="full" position="sticky" aria-selected isBordered>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit md:mr-7 lg:mr-10">
@@ -31,6 +30,7 @@ export default async function Navbar() {
               color="foreground"
               key={navbarLink.title}
               href={navbarLink.href}
+              title={navbarLink.description}
             >
               {navbarLink.title}
             </Link>

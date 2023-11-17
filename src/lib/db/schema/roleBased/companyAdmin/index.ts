@@ -1,4 +1,4 @@
-import { timestamp, pgTable, text, serial } from "drizzle-orm/pg-core";
+import { timestamp, pgTable, text, serial, integer } from "drizzle-orm/pg-core";
 import { users } from "..";
 import { company } from "../../company";
 import { relations } from "drizzle-orm";
@@ -8,7 +8,7 @@ export const companyAdmin = pgTable("company_admin", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  companyId: text("company_id")
+  companyId: integer("company_id")
     .notNull()
     .references(() => company.id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at", { mode: "date", withTimezone: true })
@@ -23,7 +23,7 @@ export const companyAdmin = pgTable("company_admin", {
 
 export const companyAdminRelations = relations(companyAdmin, ({ one, many }) => ({
   companyAdminToCompany: one(company, {
-    fields: [companyAdmin.userId],
+    fields: [companyAdmin.companyId],
     references: [company.id],
   }),
 }));

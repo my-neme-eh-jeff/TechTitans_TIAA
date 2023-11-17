@@ -15,7 +15,6 @@ export const forum = pgTable("forum", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
     messages: json("messages"),
-    // messages: json("messages").default([{}]),
 });
 
 export const forumRelations = relations(forum, ({ one, many }) => ({

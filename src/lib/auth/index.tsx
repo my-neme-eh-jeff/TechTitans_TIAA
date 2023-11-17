@@ -1,5 +1,6 @@
 import { getServerSession, type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/lib/db";
 import "dotenv/config";
@@ -17,6 +18,37 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env["GOOGLE_CLIENT_ID"]!,
       clientSecret: process.env["GOOGLE_CLIENT_SECRET"]!,
+    }),
+    CredentialsProvider({
+      credentials: {
+        email: { label: "Email", type: "email", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("No credentials sent");
+        }
+        const user = (
+          await db
+            .select()
+            .from(users)
+            .where(eq(users.email, credentials.email))
+        )[0];
+        if (!user) {
+          return null;
+          // throw new Error("Invalid credentials");
+        }
+        if (user.password !== credentials?.password) {
+          throw new Error("Have'nt logged in with google yet");
+        }
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          role: user.role,
+        };
+      },
     }),
   ],
   callbacks: {

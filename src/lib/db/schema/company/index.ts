@@ -14,13 +14,18 @@ export const company = pgTable("company", {
   email: text("email").notNull(),
   industry: text("industry").notNull(),
 
+  //12digit(precision).2digit(scale)
   revenue: decimal("revenue", { precision: 12, scale: 2 }).notNull(),
   expenses: decimal("expenses", { precision: 12, scale: 2 }).notNull(),
   netIncome: decimal("netIncome", { precision: 12, scale: 2 }).notNull(),
-  currency: text("currency").notNull(), 
+  currency: text("currency").notNull(),
 
-  createdAt: timestamp("createdAt", { mode: "date" }).notNull(),
-  updatedAt: timestamp("updatedAt", { mode: "date" }).notNull(),
+  createdAt: timestamp("created_at", { mode: "date", withTimezone: true })
+    .notNull()
+    .defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: "date", withTimezone: true })
+    .notNull()
+    .defaultNow(),
 });
 
 export const companyRelations = relations(company, ({ one, many }) => ({

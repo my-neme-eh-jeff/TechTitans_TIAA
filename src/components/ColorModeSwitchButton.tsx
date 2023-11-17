@@ -14,7 +14,7 @@ export default function ColorModeSwitchButton() {
       />
       <MoonIcon
         onClick={() => setTheme("dark")}
-        className="hover:cursor-pointer text-zinc-400 h-[1.4rem] w-[1.4rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 drop-shadow-[0px_12px_7px_#1F2937]"
+        className="hover:cursor-pointer text-zinc-400 h-[1.4rem] w-[1.4rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 drop-shadow-[0px_13px_15px_#1F2937]"
       />
     </div>
   );
