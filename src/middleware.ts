@@ -4,11 +4,13 @@ import { getAuthSession } from "@/lib/auth";
 import jwt from "jsonwebtoken";
 
 export default async function middleware(req: NextRequest) {
+    console.log("hi")
   const session = await getAuthSession();
   let token = req.headers.get("token");
   const user = jwt.verify(token!, process.env["NEXTAUTH_SECRET"]!) as any;
   const id = user.id || session?.user?.id;
   if (!id) {
+    console.log(id)
     if (token) {
       return NextResponse.json(
         {
