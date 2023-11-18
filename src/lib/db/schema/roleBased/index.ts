@@ -61,10 +61,9 @@ export const profile = pgTable("profile", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  name: text("name").notNull(),
-  role: text("role").notNull(),
-  phone: text("phone").notNull(),
-  email: text("email").notNull(),
+  phone: text("phone"),
+
+  clusterLabel: text("cluster_label"),
 
   salary: decimal("salary", { precision: 12, scale: 2 }).notNull(),
   workExperience: integer("work_experience").notNull(),
