@@ -10,7 +10,7 @@ import { safeParse } from "valibot";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { email, password } = body;
+    const { email, password, name, role } = body;
     const isFormDataValid = safeParse(LoginSchema, { email, password });
     if (!isFormDataValid.success) {
       return NextResponse.json({
@@ -42,6 +42,8 @@ export async function POST(req: Request) {
           email: email,
           id: uuidv4(),
           password: hashedPass,
+          role: role,
+          name: name,
         })
         .returning();
       newUser[0]!.password = null;

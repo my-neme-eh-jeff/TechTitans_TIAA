@@ -69,7 +69,6 @@
     "tailwind-variants": "^0.1.14",
     "uuid": "^9.0.1",
     "valibot": "^0.13.1",
-    "vercel": "^32.5.5",
     "zustand": "^4.4.1"
   },
   "devDependencies": {

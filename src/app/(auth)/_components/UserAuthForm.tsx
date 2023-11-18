@@ -37,6 +37,7 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
     try {
       const resp = await signIn("google", {
         redirect: false,
+        callbackUrl: "/dashboard",
       });
       toast.success("Logged in successfully");
       router.push("/dashboard");
@@ -81,7 +82,7 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
         const resp = await signIn("credentials", {
           email: data.email,
           password: data.password,
-          redirect: false,
+          callbackUrl: "/dashboard",
         });
         if (!resp) {
           toast.error("Server might be offline");
@@ -96,7 +97,6 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
           }
         }
       }
-
     } catch (err) {
       console.log(err);
     } finally {

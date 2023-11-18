@@ -28,15 +28,15 @@ export default function SearchButton() {
   return (
     <Button
       aria-label="Stock price lookup..."
-      className="text-sm font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20"
+      className="text-sm font-normal text-default-800 bg-default-400/20 dark:bg-default-500/20"
       endContent={
-        <Kbd className="hidden py-0.5 px-2 lg:inline-block" keys={commandKey}>
+        <Kbd className="hidden py-0.5 px-2 text-default-600 lg:inline-block" keys={commandKey}>
           K
         </Kbd>
       }
       startContent={
         <Search
-          className="text-base text-default-400 pointer-events-none flex-shrink-0"
+          className="text-base text-default-800 pointer-events-none flex-shrink-0"
           size={18}
           strokeWidth={2}
         />

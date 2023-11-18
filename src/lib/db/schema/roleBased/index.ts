@@ -11,6 +11,7 @@ import { employee } from "./employees";
 export const rolesEnum = pgEnum("roles", [
   "companyAdmin",
   "employee",
+  "user",
   "siteAdmin",
 ]);
 export type roleLiteral = Pick<SelectUser, "role">["role"];
