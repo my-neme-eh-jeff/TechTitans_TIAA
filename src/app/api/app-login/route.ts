@@ -4,7 +4,6 @@ import { LoginSchema } from "@/lib/validators/register";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 import { safeParse } from "valibot";
-import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 
 export async function POST(req: Request) {
@@ -25,10 +24,7 @@ export async function POST(req: Request) {
       .where(eq(users.email, email));
 
     if (userExistsOrNot[0] && userExistsOrNot[0]?.password) {
-      const passwordMatching = await argon2.verify(
-        userExistsOrNot[0]?.password,
-        password
-      );
+      const passwordMatching = userExistsOrNot[0]?.password === password;
       if (passwordMatching) {
         const token = jwt.sign(
           {

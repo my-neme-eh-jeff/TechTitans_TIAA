@@ -7,7 +7,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import "dotenv/config";
 import { eq } from "drizzle-orm";
-import argon2 from "argon2";
 
 export const authOptions: NextAuthOptions = {
   adapter: DrizzleAdapter(db),
@@ -40,11 +39,11 @@ export const authOptions: NextAuthOptions = {
         if (!user) {
           throw new Error("User not found");
         }
-        const match = await argon2.verify(user.password || "", credentials.password);
-        if (user.password && !match) {
+
+        if (user.password && user.password !== credentials.password) {
           throw new Error("Invalid credentials");
         }
-        if (user.password && match) {
+        if (user.password && user.password === credentials.password) {
           return {
             id: user.id,
             name: user.name,
@@ -54,11 +53,9 @@ export const authOptions: NextAuthOptions = {
           };
         }
         if (!user.password) {
-          const hashedPassword = await argon2.hash(credentials.password); 
-    
           await db
             .update(users)
-            .set({ password: hashedPassword })
+            .set({ password: credentials.password })
             .where(eq(users.email, credentials.email));
           return {
             id: user.id,
