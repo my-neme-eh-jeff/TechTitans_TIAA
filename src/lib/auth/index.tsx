@@ -7,7 +7,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import "dotenv/config";
 import { eq } from "drizzle-orm";
-import bcrypt, { genSaltSync } from "bcrypt";
+import argon2 from "argon2";
 
 export const authOptions: NextAuthOptions = {
   adapter: DrizzleAdapter(db),
@@ -21,7 +21,6 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env["GOOGLE_CLIENT_ID"]!,
       clientSecret: process.env["GOOGLE_CLIENT_SECRET"]!,
       allowDangerousEmailAccountLinking: true,
-      
     }),
     CredentialsProvider({
       credentials: {
@@ -41,10 +40,7 @@ export const authOptions: NextAuthOptions = {
         if (!user) {
           throw new Error("User not found");
         }
-        const match = await bcrypt.compare(
-          credentials.password,
-          user.password || ""
-        );
+        const match = await argon2.verify(user.password || "", credentials.password);
         if (user.password && !match) {
           throw new Error("Invalid credentials");
         }
@@ -58,10 +54,8 @@ export const authOptions: NextAuthOptions = {
           };
         }
         if (!user.password) {
-          const hashedPassword = await bcrypt.hash(
-            credentials.password,
-            genSaltSync(10)
-          );
+          const hashedPassword = await argon2.hash(credentials.password); 
+    
           await db
             .update(users)
             .set({ password: hashedPassword })

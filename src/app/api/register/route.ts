@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema/roleBased";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
-import bcrypt, { genSaltSync } from "bcrypt";
+import argon2 from "argon2";
 import { v4 as uuidv4 } from "uuid";
 import { LoginSchema } from "@/lib/validators/register";
 import { safeParse } from "valibot";
@@ -28,14 +28,14 @@ export async function POST(req: Request) {
         error: "User already exists",
       });
     } else if (userExistsOrNot && userExistsOrNot[0]?.password === null) {
-      const hashedPass = await bcrypt.hash(password, genSaltSync());
+      const hashedPass = await argon2.hash(password);
       await db.update(users).set({ password: hashedPass });
       return NextResponse.json({
         success: false,
         error: "User already exists",
       });
     } else {
-      const hashedPass = await bcrypt.hash(password, genSaltSync());
+      const hashedPass = await argon2.hash(password);
       const newUser = await db
         .insert(users)
         .values({
