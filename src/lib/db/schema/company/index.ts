@@ -20,6 +20,7 @@ export const company = pgTable("company", {
   netIncome: decimal("netIncome", { precision: 12, scale: 2 }).notNull(),
   currency: text("currency").notNull(),
 
+  
   createdAt: timestamp("created_at", { mode: "date", withTimezone: true })
     .notNull()
     .defaultNow(),
