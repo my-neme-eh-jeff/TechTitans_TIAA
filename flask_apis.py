@@ -14,6 +14,39 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from dotenv import load_dotenv
 
 app = Flask(__name__)
+load_dotenv()
+
+supabase_url = os.environ.get('SUPABASE_URL')
+supabase_key = os.environ.get('SUPABASE_KEY')
+
+supabase_client = supabase.create_client(supabase_url, supabase_key)
+
+csv_file_path = "./retirement_plans.csv"
+openai_api_key = os.environ.get('OPENAI_API_KEY')
+# os.environ["OPENAI_API_KEY"] = openai_api_key
+llm = OpenAI(openai_api_key=openai_api_key)
+loader = CSVLoader(file_path=csv_file_path, encoding="utf-8")
+data = loader.load()
+embeddings = OpenAIEmbeddings()
+vectors = FAISS.from_documents(data, embeddings)
+
+template = """
+question: {question}
+
+Extract the topic of the conversation
+
+Topic:
+"""
+
+chain = ConversationalRetrievalChain.from_llm(
+    llm=ChatOpenAI(temperature=0.0, model_name='gpt-3.5-turbo', openai_api_key=openai_api_key),
+    retriever=vectors.as_retriever()
+    )
+
+conversation_history = []
+current_timestamp = datetime.now().isoformat()
+
+app.run(debug=True)
 
 class ChatInput:
     def __init__(self, user_id: int, chat_id: int, topic: str, query: str):
@@ -111,38 +144,3 @@ def update_and_get_clusters():
 @app.route("/")
 def hello_world():
     return "<p>Welcome to our API!</p>"
-
-if __name__ == "__main__":
-    load_dotenv()
-
-    supabase_url = os.environ.get('SUPABASE_URL')
-    supabase_key = os.environ.get('SUPABASE_KEY')
-
-    supabase_client = supabase.create_client(supabase_url, supabase_key)
-
-    csv_file_path = "./retirement_plans.csv"
-    openai_api_key = os.environ.get('OPENAI_API_KEY')
-    # os.environ["OPENAI_API_KEY"] = openai_api_key
-    llm = OpenAI(openai_api_key=openai_api_key)
-    loader = CSVLoader(file_path=csv_file_path, encoding="utf-8")
-    data = loader.load()
-    embeddings = OpenAIEmbeddings()
-    vectors = FAISS.from_documents(data, embeddings)
-
-    template = """
-    question: {question}
-
-    Extract the topic of the conversation
-
-    Topic:
-    """
-
-    chain = ConversationalRetrievalChain.from_llm(
-        llm=ChatOpenAI(temperature=0.0, model_name='gpt-3.5-turbo', openai_api_key=openai_api_key),
-        retriever=vectors.as_retriever()
-    )
-
-    conversation_history = []
-    current_timestamp = datetime.now().isoformat()
-
-    app.run(debug=True)
