@@ -44,19 +44,18 @@ export default async function Navbar() {
               </Link>
             </NavbarItem>
           ))}
-        {auth.user.role === "employee" ||
-          (auth.user.role === "siteAdmin" &&
-            navbarLinksForDashboardEmployee.map((navbarLink, index) => (
-              <NavbarItem key={index}>
-                <Link
-                  color="foreground"
-                  key={navbarLink.title}
-                  href={navbarLink.href}
-                >
-                  {navbarLink.title}
-                </Link>
-              </NavbarItem>
-            )))}
+        {(auth.user.role === "employee" || auth.user.role === "siteAdmin") &&
+          navbarLinksForDashboardEmployee.map((navbarLink, index) => (
+            <NavbarItem key={index}>
+              <Link
+                color="foreground"
+                key={navbarLink.title}
+                href={navbarLink.href}
+              >
+                {navbarLink.title}
+              </Link>
+            </NavbarItem>
+          ))}
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">

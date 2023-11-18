@@ -1,7 +1,6 @@
-import { enumType, number, object, string } from "valibot";
+import { enumType, number, object, optional, string } from "valibot";
 
 export const CalculatorSchema = object({
-  userId: string(),
   salary: number(),
   workExperience: number(),
   age: number(),
@@ -12,5 +11,5 @@ export const CalculatorSchema = object({
     "I am happy the way i am",
     "Like a monk",
   ]),
-  phone: string(),
+  phone: optional(string()),
 });

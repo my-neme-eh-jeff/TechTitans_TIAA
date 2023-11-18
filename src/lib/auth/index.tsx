@@ -97,7 +97,6 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async jwt({ token, user, trigger }) {
-      console.log(trigger);
       const dbUser = (
         await db
           .select()

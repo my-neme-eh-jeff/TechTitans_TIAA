@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { CalculatorSchema } from "@/lib/validators/calculator";
 import { safeParse } from "valibot";
 import { getAuthSession } from "@/lib/auth";
@@ -6,19 +6,13 @@ import jwt from "jsonwebtoken";
 import { db } from "@/lib/db";
 import { profile } from "@/lib/db/schema/roleBased";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   const session = await getAuthSession();
   let token = req.headers.get("token");
   const user = jwt.verify(token!, process.env["NEXTAUTH_SECRET"]!) as any;
   const id = user.id || session?.user?.id;
   if (!id) {
-    return NextResponse.json(
-      {
-        success: false,
-        error: "User not logged in",
-      },
-      { status: 401 }
-    );
+    return NextResponse.redirect(new URL("/sign-in", req.nextUrl));
   }
 
   const body = await req.json();

@@ -53,7 +53,7 @@ export const navbarLinksForDashboardAdmin = [
   },
   {
     title: "Retirement Calculator",
-    href: "/retirement-calculator",
+    href: "/dashboard/retirement-calculator",
   },
 ] as const;
 export type NavbarLinksForDashboardAdminType =
@@ -66,7 +66,7 @@ export const navbarLinksForDashboardEmployee = [
   },
   {
     title: "Retirement Calculator",
-    href: "/retirement-calculator",
+    href: "/dashboard/retirement-calculator",
   },
 ] as const;
 export type NavbarLinksForDashboardEmployeeType =
