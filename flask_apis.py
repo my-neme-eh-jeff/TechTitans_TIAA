@@ -110,15 +110,15 @@ def retirement_calculator():
     profile = request.get_json()
     load_dotenv()
 
-    question = f"salary: {profile['salary']}, workExperience: {profile['workExperience']}, current_age: {profile['current_age']}, goalRetirementAge: {profile['goalRetirementAge']}, safetyInRetirement: {profile['safetyInRetirement']}, typeOfRetirement: {profile['typeOfRetirement']}, inflation_rate: {profile['inflation_rate']}, currentNetWorth: {profile['currentNetWorth']}, noOfDependents: {profile['noOfDependents']}. I am an Indian Citizen. How much money should i save in how many years, to achieve my retirement plan."
+    question = f"My current salary is {profile['salary']}. I have work experience of {profile['workExperience']} years. My current age is {profile['current_age']}. I want to retire by {profile['goalRetirementAge']}. I want {profile['safetyInRetirement']} type of safety in my retirement plan, of the type '{profile['typeOfRetirement']}'. The current inflation rate is {profile['inflation_rate']}. My current Net Worth is {profile['currentNetWorth']}. I have {profile['noOfDependents']} people that are dependent on me in my family. Suggest me a retirement plan. Limit the output to 300 characters."
 
     chain = ConversationalRetrievalChain.from_llm(
         llm=ChatOpenAI(temperature=0.0, model_name='gpt-3.5-turbo', openai_api_key=openai_api_key),
         retriever=vectors.as_retriever()
         )
-    plan = chain({"question": question})
+    plan = chain({"question": question, "chat_history": ""})
 
-    return jsonify({"plan": plan})
+    return jsonify({"output": plan['answer']})
 
 def perform_clustering(user_id):
     load_dotenv()
