@@ -129,7 +129,7 @@ def perform_clustering(user_id):
 
     clusters = {}
     for cluster_label in df['cluster_label'].unique():
-        cluster_content = df[df['cluster_label'] == cluster_label][['user_id']].astype(int).to_dict(orient='records')
+        cluster_content = df[df['cluster_label'] == cluster_label][['user_id']].to_dict(orient='records')
         clusters[str(cluster_label)] = cluster_content
 
     for num, cluster in clusters.items():
