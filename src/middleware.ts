@@ -9,13 +9,17 @@ export default async function middleware(req: NextRequest) {
   const user = jwt.verify(token!, process.env["NEXTAUTH_SECRET"]!) as any;
   const id = user.id || session?.user?.id;
   if (!id) {
-    return NextResponse.json(
-      {
-        success: false,
-        error: "User not logged in",
-      },
-      { status: 401 }
-    );
+    if (token) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "User not logged in",
+        },
+        { status: 401 }
+      );
+    } else {
+      return NextResponse.redirect("/login");
+    }
   }
 }
 
