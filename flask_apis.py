@@ -25,13 +25,6 @@ class ChatInput:
 
 @app.route('/chat', methods=['GET'])
 def conversational_chat():
-    data = request.get_json()
-    load_dotenv()
-
-    supabase_url = os.environ.get('SUPABASE_URL')
-    supabase_key = os.environ.get('SUPABASE_KEY')
-
-    supabase_client = supabase.create_client(supabase_url, supabase_key)
     csv_file_path = "./retirement_plans.csv"
     openai_api_key = os.environ.get('OPENAI_API_KEY')
     # os.environ["OPENAI_API_KEY"] = openai_api_key
@@ -40,6 +33,14 @@ def conversational_chat():
     data = loader.load()
     embeddings = OpenAIEmbeddings()
     vectors = FAISS.from_documents(data, embeddings)
+
+    data = request.get_json()
+    load_dotenv()
+
+    supabase_url = os.environ.get('SUPABASE_URL')
+    supabase_key = os.environ.get('SUPABASE_KEY')
+
+    supabase_client = supabase.create_client(supabase_url, supabase_key)
 
     template = """
     question: {question}
@@ -133,8 +134,8 @@ def perform_clustering(user_id):
         clusters[str(cluster_label)] = cluster_content
 
     for num, cluster in clusters.items():
-        if user_id in cluster:
-            return cluster[num]
+        if user_id in cluster[0].values():
+            return cluster[0]
     
     return None
 
