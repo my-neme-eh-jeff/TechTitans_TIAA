@@ -96,6 +96,30 @@ def conversational_chat():
 
     return jsonify({"user_id": chat_input.user_id, "chat_id": chat_input.chat_id, "response": result["answer"]})
 
+@app.route("/retirement-calculator", methods=['GET'])
+def retirement_calculator():
+    csv_file_path = "./retirement_plans.csv"
+    openai_api_key = os.environ.get('OPENAI_API_KEY')
+    # os.environ["OPENAI_API_KEY"] = openai_api_key
+    # llm = OpenAI(openai_api_key=openai_api_key)
+    loader = CSVLoader(file_path=csv_file_path, encoding="utf-8")
+    data = loader.load()
+    embeddings = OpenAIEmbeddings()
+    vectors = FAISS.from_documents(data, embeddings)
+
+    profile = request.get_json()
+    load_dotenv()
+
+    question = f"salary: {profile['salary']}, workExperience: {profile['workExperience']}, current_age: {profile['current_age']}, goalRetirementAge: {profile['goalRetirementAge']}, safetyInRetirement: {profile['safetyInRetirement']}, typeOfRetirement: {profile['typeOfRetirement']}, inflation_rate: {profile['inflation_rate']}, currentNetWorth: {profile['currentNetWorth']}, noOfDependents: {profile['noOfDependents']}. I am an Indian Citizen. How much money should i save in how many years, to achieve my retirement plan."
+
+    chain = ConversationalRetrievalChain.from_llm(
+        llm=ChatOpenAI(temperature=0.0, model_name='gpt-3.5-turbo', openai_api_key=openai_api_key),
+        retriever=vectors.as_retriever()
+        )
+    plan = chain({"question": question})
+
+    return jsonify({"plan": plan})
+
 def perform_clustering(user_id):
     load_dotenv()
 
@@ -138,6 +162,7 @@ def perform_clustering(user_id):
             return cluster[0]
     
     return None
+
 
 @app.route("/update-and-get-clusters", methods=['GET'])
 def update_and_get_clusters():
