@@ -8,8 +8,8 @@ import { motion, useInView, useAnimation, type Variant } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { DotLottiePlayer, PlayerEvents } from "@dotlottie/react-player";
 import "@dotlottie/react-player/dist/index.css";
-import { Spinner } from "@nextui-org/react";
-
+import { Divider, Spinner } from "@nextui-org/react";
+import Aos from "aos";
 
 function AboutSection() {
   const [loadingForPiggyBankLottie, setLoadingForPiggyBankLottie] =
@@ -22,11 +22,13 @@ function AboutSection() {
     "Stressed about your income?",
     "Thinking about saving money?",
   ];
+  useEffect(() => {
+    Aos.init({ duration: 1000, once: true, easing: "ease", offset: 60 });
+  }, []);
 
   return (
     <>
       <div className="flex flex-col gap-y-40">
-        
         <div className="flex flex-col md:flex-row align-middle justify-evenly">
           <div
             className="flex place-items-center justify-center align-middle md:mr-16 max-w-md mx-auto md:mx-0 md:max-w-none mb-4 md:mb-0"
@@ -35,7 +37,7 @@ function AboutSection() {
           >
             {loadingForPiggyBankLottie && (
               <div>
-                <Spinner color="secondary" />
+                <Spinner color="primary" />
               </div>
             )}
             <DotLottiePlayer
@@ -82,6 +84,8 @@ function AboutSection() {
           </div>
         </div>
 
+        <HowWeWorkSection />
+
         <div className="flex flex-col-reverse md:flex-row justify-evenly align-middle">
           <div className="flex justify-evenly  my-auto text-center md:text-left">
             <AnimatedText
@@ -98,7 +102,7 @@ function AboutSection() {
           <div className="sm:order-1 md:order-2">
             {loadingForSunflowerMoneyGrowingLottie && (
               <div>
-                <Spinner color="secondary" />
+                <Spinner color="primary" />
               </div>
             )}
             <DotLottiePlayer
@@ -113,11 +117,6 @@ function AboutSection() {
             ></DotLottiePlayer>
           </div>
         </div>
-
-        <div>
-          <HowWeWorkSection />
-        </div>
-
       </div>
 
       <div
@@ -132,6 +131,8 @@ function AboutSection() {
           }}
         ></div>
       </div>
+
+      <Divider className="mb-24 mt-32" />
     </>
   );
 }

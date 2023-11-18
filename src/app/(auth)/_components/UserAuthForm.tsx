@@ -9,59 +9,75 @@ import { Eye, EyeOff } from "lucide-react";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import { safeParse } from "valibot";
-import { redirect } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
-// import toast from "react-hot-toast";
 
 type UserAuthFormProps = {
   isSignup?: boolean;
 };
 
 export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
+  const router = useRouter();
+  //now how do i get the email from the params using useSearchParams
+  const searchParams = useSearchParams();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingGoogle, setIsLoadingGoogle] = useState(false);
+  const [isLoadingCredentials, setIsLoadingCredentials] = useState(false);
   const [data, setData] = useState({
-    email: "",
+    email: searchParams.get("email") || "",
     password: "",
     confirmPassword: "",
   });
 
   const handleLoginWithGoogle = async () => {
-    setIsLoading(true);
+    setIsLoadingGoogle(true);
     try {
-      await signIn("google");
-      // toast.success("Logged in successfully");
+      const resp = await signIn("google", {
+        redirect: false,
+      });
+      toast.success("Logged in successfully");
+      router.push("/dashboard");
     } catch (err) {
-      // toast.error("Error logging in");
-      console.log(err);
+      toast.error("Error logging in");
     } finally {
-      setIsLoading(false);
+      setIsLoadingGoogle(false);
     }
   };
 
   const hangleLoginWithCredentials = async () => {
     const isFormDataValid = safeParse(LoginSchema, data);
-    if (!isFormDataValid) {
-      toast.error("Invalid credentials");
+    if (!isFormDataValid.success) {
+      toast.error("Please enter valid credentials");
       return;
     }
     if (isSignup && data.password !== data.confirmPassword) {
-      toast.error("Passwords do not match");
+      setPasswordError(true);
       return;
+    } else if (isSignup) {
+      setPasswordError(false);
     }
 
     try {
-      setIsLoading(true);
+      setIsLoadingCredentials(true);
+
       if (isSignup) {
-        const resp = await axios.post("/api/auth/register", data);
-        console.log(resp.data);
+        const resp = await axios.post("/api/register", data);
         if (!resp) {
           toast.error("Server might be offline");
-          return;
+        } else if (resp.data.success) {
+          toast.success("Signed up successfully");
+          router.push("/login");
+        } else if (resp.data.error === "User already exists") {
+          toast.error("User already exists on this email");
+        } else {
+          toast.error("Unexpected error");
         }
-      } else {
+      }
+
+      if (!isSignup) {
         const resp = await signIn("credentials", {
           email: data.email,
           password: data.password,
@@ -69,19 +85,22 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
         });
         if (!resp) {
           toast.error("Server might be offline");
-          return;
-        }
-        if (resp?.ok) {
-          toast.success(`${isSignup ? "Signed up" : "Logged in"} successfully`);
-          redirect("/dashboard");
+        } else if (resp.ok) {
+          toast.success("Logged in successfully");
+          router.push("/dashboard");
         } else {
-          toast.error("Invalid credentials");
+          toast.error(resp.error);
+          if (resp.error === "User not found") {
+            //redirect with email in parameters
+            router.push(`/sign-up?email=${data.email}`);
+          }
         }
       }
+
     } catch (err) {
       console.log(err);
     } finally {
-      setIsLoading(false);
+      setIsLoadingCredentials(false);
     }
   };
 
@@ -99,6 +118,7 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
           />
           <Input
             labelPlacement="inside"
+            errorMessage={passwordError ? "Passwords do not match" : undefined}
             endContent={
               isPasswordVisible ? (
                 <Eye
@@ -149,6 +169,7 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
             type="submit"
             color="success"
             variant="solid"
+            isLoading={isLoadingCredentials}
             onClick={hangleLoginWithCredentials}
           >
             Submit
@@ -183,9 +204,9 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
           radius="full"
           className="w-[62%] bg-[#E4E4E7] dark:bg-[#3F3F46]"
           variant="flat"
-          startContent={!isLoading && <Icons.Google />}
+          startContent={!isLoadingGoogle && <Icons.Google />}
           onClick={handleLoginWithGoogle}
-          isLoading={isLoading}
+          isLoading={isLoadingGoogle}
         >
           Google
         </Button>

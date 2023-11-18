@@ -26,7 +26,6 @@ export const users = pgTable("user", {
     .notNull()
     .defaultNow(),
   role: rolesEnum("role").notNull().default("employee"),
-  company: text("company"),
 });
 export type SelectUser = InferSelectModel<typeof users>;
 export type InsertUser = InferInsertModel<typeof users>;

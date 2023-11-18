@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { timestamp, pgTable, text, serial, pgEnum } from "drizzle-orm/pg-core";
+import { timestamp, pgTable, text, serial, pgEnum, integer } from "drizzle-orm/pg-core";
 import { users } from "../roleBased";
 
 export const rolesEnum = pgEnum("roles_for_chat", ["system", "user"]);
@@ -7,7 +7,7 @@ export const messages = pgTable("messages", {
   id: serial("id").notNull().primaryKey(),
   messages: text("messages").notNull(),
   role: rolesEnum("role").notNull().default("user"),
-  chatId: text("chat_id")
+  chatId: integer("chat_id")
     .notNull()
     .references(() => chats.id, { onDelete: "cascade" }),
 });

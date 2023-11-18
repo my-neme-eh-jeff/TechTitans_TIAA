@@ -1,19 +1,21 @@
 "use client";
-import useSetActiveSectionHook from "@/hooks/useSetActiveSectionHook";
 import { Divider } from "@nextui-org/divider";
+import Aos from "aos";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { useState, type MouseEvent } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
 import { Check, X } from "lucide-react";
 import { Button } from "@nextui-org/button";
 import { Switch } from "@nextui-org/react";
+
 import ActionSectionWrapper from "./hoc";
 
 function PricingSection() {
   const [isSelected, setIsSelected] = useState(true);
-  //if its selected then monthly
-
   let mouseX = useMotionValue(0);
   let mouseY = useMotionValue(0);
+  useEffect(() => {
+    Aos.init({ duration: 1000, once: true, easing: "ease", offset: 60 });
+  }, []);
 
   function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
     let { left, top } = currentTarget.getBoundingClientRect();

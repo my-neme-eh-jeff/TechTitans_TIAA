@@ -6,10 +6,11 @@ import { Link } from "@nextui-org/link";
 import { motion } from "framer-motion";
 import { tv } from "tailwind-variants";
 import Image from "next/image";
+import { Divider } from "@nextui-org/divider";
 
 import { cn } from "@/lib/utils/ui";
-import GandhiImage from "@/assets/images/Mahatma-Gandhi-PNG.png";
-import GandhiImageDark from "@/assets/images/Mahatma-Gandhi-dark.png";
+import GandhiImageLight from "@/assets/images/MahatmaGandhiLight.webp";
+import GandhiImageDark from "@/assets/images/MahatmaGandhiDark.webp";
 import ActiveSectionWrapper from "./hoc";
 
 const titleVariants = tv({
@@ -69,13 +70,21 @@ function HeroSection() {
   return (
     <>
       <div className="bg-[#fee8c977] absolute -z-10 right-[11rem] transform-gpu -top-4 md:-top-0 h-[20rem] md:h-[31.25rem]  rounded-full blur-[15rem] md:blur-[20rem] lg:blur-[15rem] w-[31.25rem] xl:w-[68.75rem] md:w-[30rem] dark:bg-[#484239]"></div>
+      <div className="absolute overflow-hidden md:h-[500px] lg:h-[743px] xl:h-screen -z-10 inset-0  w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_2px),linear-gradient(to_bottom,#80808012_1px,transparent_2px)] bg-[size:24px_24px]"></div>
+      <Divider className="hidden md:block md:absolute top-full" />
+
       <div className="flex flex-col md:flex-row mt-5">
         <div className="lg:max-w-xl my-auto lg:pb-10 md:max-w-sm ml-10 select-none hidden md:flex dark:hidden light:block">
-          <Image alt="Gandhi Aesthetic Image" src={GandhiImage} />
+          <Image alt="Gandhi Aesthetic Image" src={GandhiImageLight} priority />
         </div>
+
         <div className="hidden dark:block">
           <div className="lg:max-w-xl my-auto lg:pb-10 md:max-w-sm ml-10 select-none hidden md:flex ">
-            <Image alt="Gandhi Aesthetic Image" src={GandhiImageDark} />
+            <Image
+              alt="Gandhi Aesthetic Image"
+              src={GandhiImageDark}
+              priority
+            />
           </div>
         </div>
 

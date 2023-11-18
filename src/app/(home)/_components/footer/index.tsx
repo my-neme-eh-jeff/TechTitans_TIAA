@@ -4,7 +4,6 @@ import { Link } from "@nextui-org/link";
 import { Divider } from "@nextui-org/divider";
 
 //components
-import Logo from "@/components/icons";
 
 export default function Footer() {
   const developers = [
@@ -59,7 +58,7 @@ export default function Footer() {
               <Link
                 href="/"
                 color="foreground"
-                aria-label="Go to home"
+                aria-label="Retiral"
                 title="home"
                 className="inline-flex items-center"
               >
@@ -97,6 +96,7 @@ export default function Footer() {
                         <Link
                           key={index}
                           color="foreground"
+                          aria-label={developer.name}
                           isExternal
                           href={developer.linkedin}
                           underline="hover"
@@ -179,10 +179,14 @@ export default function Footer() {
               © Copyright 2023 | Privacy Policy | Terms of Use
             </p>
             <div className="flex items-center mt-4 space-x-4 sm:mt-0">
-              <Link isExternal href="">
+              <Link
+                isExternal
+                href=""
+                aria-label="Check out our instagram page"
+              >
                 <Instagram className="dark:text-default-500 text-black hover:text-pink-500 transition-colors " />
               </Link>
-              <Link isExternal href="">
+              <Link isExternal href="" aria-label="Check out our twitter page">
                 <Twitter className="dark:text-default-500 text-black hover:text-blue-400 transition-colors" />
               </Link>
             </div>

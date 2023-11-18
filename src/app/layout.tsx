@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   icons: {
-    
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
@@ -81,7 +80,7 @@ export default function RootLayout({
       className={cn(GeistSans.className, "scroll-smooth")}
       suppressHydrationWarning
     >
-      <body>
+      <body suppressHydrationWarning>
         <ReactQueryClientProvider>
           <AuthSessionProvider>
             <UIProvider

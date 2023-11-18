@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { BadgeIndianRupee } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Sign Up",
+  title: "Login",
 };
 
 export default function LoginPage() {

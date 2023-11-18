@@ -16,12 +16,6 @@ import { button as buttonStyles } from "@nextui-org/theme";
 import { BadgeIndianRupee } from "lucide-react";
 import NextLink from "next/link";
 import { useSession } from "next-auth/react";
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from "@nextui-org/dropdown";
 
 //components
 import ColorModeSwitchButton from "@/components/ColorModeSwitchButton";
@@ -32,14 +26,6 @@ import {
 import useActiveSection from "@/hooks/useActiveSection";
 import SearchButton from "./SearchButton";
 import UserDropdown from "@/components/UserDropdown";
-
-declare module "@nextui-org/tabs" {
-  interface TabItemProps {
-    href: string;
-    as: any;
-    title: any;
-  }
-}
 
 export const Navbar = () => {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
@@ -54,7 +40,7 @@ export const Navbar = () => {
   };
 
   return (
-    <NextUINavbar maxWidth="full" position="sticky" aria-selected>
+    <NextUINavbar maxWidth="full" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center" href="/">
@@ -63,7 +49,7 @@ export const Navbar = () => {
           </NextLink>
         </NavbarBrand>
 
-        <div className="hidden md:flex ml-10 mr-2">
+        <NavbarItem className="hidden md:flex ml-10 mr-2">
           <Tabs
             aria-label="Options"
             variant="underlined"
@@ -80,6 +66,8 @@ export const Navbar = () => {
               return (
                 <Tab
                   as={Link}
+                  name={navbarLink.title}
+                  aria-label={"Navigate to" + navbarLink.title}
                   key={navbarLink.title}
                   title={navbarLink.title}
                   href={navbarLink.href}
@@ -87,7 +75,7 @@ export const Navbar = () => {
               );
             })}
           </Tabs>
-        </div>
+        </NavbarItem>
 
         <NavbarItem className="hidden md:flex">
           <SearchButton />
@@ -98,22 +86,6 @@ export const Navbar = () => {
         className="hidden md:flex basis-1/5 md:basis-full"
         justify="end"
       >
-        {/* //TODO: Add language localisation and dropdowns */}
-        {/* <NavbarItem>
-          <Dropdown placement="bottom-end">
-            <DropdownTrigger>
-              <Globe />
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                English
-              </DropdownItem>
-              <DropdownItem key="profile" className="h-14 gap-2">
-                Hindi
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </NavbarItem> */}
 
         <NavbarItem>
           <ColorModeSwitchButton />

@@ -1,7 +1,6 @@
-import { createInsertSchema, createSelectSchema } from "drizzle-valibot";
-import { users } from "../db/schema/roleBased";
-import { minLength, string } from "valibot";
+import { email, minLength, object, string, toTrimmed } from "valibot"; 
 
-export const LoginSchema = createInsertSchema(users, {
-  password: (schema) => string([minLength(8)]),
+export const LoginSchema = object({
+  email: string([toTrimmed(), email()]),
+  password: string([toTrimmed(), minLength(8)]),
 });

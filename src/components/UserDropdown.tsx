@@ -12,12 +12,12 @@ import {
 } from "@nextui-org/react";
 import { LogOutIcon, Settings, User2 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
-
+import { useRouter } from "next/navigation";
 export default function UserDropdown() {
   const iconClasses =
     "text-xl h-5 w-15 text-default-500 pointer-events-none flex-shrink-0";
   const { data } = useSession();
-
+  const router = useRouter();
   return (
     <>
       <Dropdown>
@@ -36,7 +36,9 @@ export default function UserDropdown() {
           <DropdownSection title="Actions" showDivider>
             <DropdownItem
               key="edit"
-              shortcut="⌘⇧E"
+              onClick={() => {
+                router.push("/dashboard/profile");
+              }}
               description="Edit account details"
               startContent={<User name="" className={iconClasses} />}
             >
@@ -44,7 +46,9 @@ export default function UserDropdown() {
             </DropdownItem>
             <DropdownItem
               key="settings"
-              shortcut="⌘⇧S"
+              onClick={() => {
+                router.push("/dashboard/settings");
+              }}
               description="Change preferences"
               startContent={
                 <Settings

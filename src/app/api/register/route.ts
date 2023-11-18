@@ -31,7 +31,7 @@ export async function POST(req: Request) {
       const hashedPass = await bcrypt.hash(password, genSaltSync());
       await db.update(users).set({ password: hashedPass });
       return NextResponse.json({
-        success: true,
+        success: false,
         error: "User already exists",
       });
     } else {

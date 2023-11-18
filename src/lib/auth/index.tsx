@@ -1,11 +1,13 @@
+import { db } from "@/lib/db";
+import { users } from "@/lib/db/schema/roleBased";
+
 import { getServerSession, type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { db } from "@/lib/db";
 import "dotenv/config";
-import { users, type roleLiteral } from "@/lib/db/schema/roleBased";
 import { eq } from "drizzle-orm";
+import bcrypt, { genSaltSync } from "bcrypt";
 
 export const authOptions: NextAuthOptions = {
   adapter: DrizzleAdapter(db),
@@ -18,6 +20,8 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env["GOOGLE_CLIENT_ID"]!,
       clientSecret: process.env["GOOGLE_CLIENT_SECRET"]!,
+      allowDangerousEmailAccountLinking: true,
+      
     }),
     CredentialsProvider({
       credentials: {
@@ -35,12 +39,42 @@ export const authOptions: NextAuthOptions = {
             .where(eq(users.email, credentials.email))
         )[0];
         if (!user) {
-          return null;
-          // throw new Error("Invalid credentials");
+          throw new Error("User not found");
         }
-        if (user.password !== credentials?.password) {
-          throw new Error("Have'nt logged in with google yet");
+        const match = await bcrypt.compare(
+          credentials.password,
+          user.password || ""
+        );
+        if (user.password && !match) {
+          throw new Error("Invalid credentials");
         }
+        if (user.password && match) {
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            image: user.image,
+            role: user.role,
+          };
+        }
+        if (!user.password) {
+          const hashedPassword = await bcrypt.hash(
+            credentials.password,
+            genSaltSync(10)
+          );
+          await db
+            .update(users)
+            .set({ password: hashedPassword })
+            .where(eq(users.email, credentials.email));
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            image: user.image,
+            role: user.role,
+          };
+        }
+
         return {
           id: user.id,
           name: user.name,
@@ -62,7 +96,8 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
+      console.log(trigger);
       const dbUser = (
         await db
           .select()

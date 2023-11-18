@@ -2,7 +2,6 @@ import UserAuthForm from "../_components/UserAuthForm";
 import { SVGLineGlowAnimateContainer } from "../_components/LineGlowAnimation";
 import type { Metadata } from "next";
 
-import { Link } from "@nextui-org/link";
 import { BadgeIndianRupee } from "lucide-react";
 
 export const metadata: Metadata = {
