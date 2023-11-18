@@ -61,10 +61,7 @@ export const profile = pgTable("profile", {
   userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  name: text("name").notNull(),
-  role: text("role").notNull(),
-  phone: text("phone").notNull(),
-  email: text("email").notNull(),
+  phone: text("phone"),
 
   salary: decimal("salary", { precision: 12, scale: 2 }).notNull(),
   workExperience: integer("work_experience").notNull(),
@@ -72,6 +69,8 @@ export const profile = pgTable("profile", {
   goalRetirementAge: integer("goal_retirement_age").notNull(),
   safetyInRetirement: safetyEnum("safety_in_retirement").notNull(),
   typeOfRetirement: typeOfRetirementEnum("type_of_retirement").notNull(),
+
+  clusterLabel: text("cluster_label"),
 
   createdAt: timestamp("created_at", { mode: "date", withTimezone: true })
     .notNull()

@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     if (!isFormDataValid.success) {
       return NextResponse.json({
         success: false,
-        error: "Invalid data",
+        error: isFormDataValid.issues,
       });
     }
     const userExistsOrNot = await db
