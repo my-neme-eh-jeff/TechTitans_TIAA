@@ -146,6 +146,22 @@ def update_and_get_clusters():
 
     return jsonify({"forum": clusters})
 
+@app.route("/get-info", methods=['GET'])
+def get_info():
+    user_id = request.args.get('user_id')
+    load_dotenv()
+
+    supabase_url = os.environ.get('SUPABASE_URL')
+    supabase_key = os.environ.get('SUPABASE_KEY')
+
+    supabase_client = supabase.create_client(supabase_url, supabase_key)
+    response = supabase_client.table('user').select('*').filter('id', 'eq', user_id).execute()
+    profiles = response.data
+
+    df = pd.DataFrame(profiles)
+
+    return jsonify({"info": df.to_dict(orient='records')})
+
 @app.route("/")
 def hello_world():
     return "<p>Welcome to our API!</p>"
