@@ -65,15 +65,6 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^4.35.3
     version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
-  '@types/bcrypt':
-    specifier: ^5.0.2
-    version: 5.0.2
-  '@types/jsonwebtoken':
-    specifier: ^9.0.5
-    version: 9.0.5
-  '@types/uuid':
-    specifier: ^9.0.7
-    version: 9.0.7
   '@vercel/analytics':
     specifier: ^1.0.2
     version: 1.1.1
@@ -196,6 +187,12 @@ devDependencies:
   '@types/aos':
     specifier: ^3.0.7
     version: 3.0.7
+  '@types/bcrypt':
+    specifier: ^5.0.2
+    version: 5.0.2
+  '@types/jsonwebtoken':
+    specifier: ^9.0.5
+    version: 9.0.5
   '@types/lodash':
     specifier: ^4.14.201
     version: 4.14.201
@@ -208,6 +205,9 @@ devDependencies:
   '@types/react-dom':
     specifier: ^18
     version: 18.2.15
+  '@types/uuid':
+    specifier: ^9.0.7
+    version: 9.0.7
   autoprefixer:
     specifier: ^10.0.1
     version: 10.4.16(postcss@8.4.30)
@@ -3751,7 +3751,7 @@ packages:
     resolution: {integrity: sha512-6atioO8Y75fNcbmj0G7UjI9lXN2pQ/IGJ2FWT4a/btd0Lk9lQalHLKhkgKVZ3r+spnmWUKfbMi1GEe9wyHQfNQ==}
     dependencies:
       '@types/node': 20.9.0
-    dev: false
+    dev: true
 
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
@@ -3769,7 +3769,7 @@ packages:
     resolution: {integrity: sha512-VRLSGzik+Unrup6BsouBeHsf4d1hOEgYWTm/7Nmw1sXoN1+tRly/Gy/po3yeahnP4jfnQWWAhQAqcNfH7ngOkA==}
     dependencies:
       '@types/node': 20.9.0
-    dev: false
+    dev: true
 
   /@types/lodash@4.14.201:
     resolution: {integrity: sha512-y9euML0cim1JrykNxADLfaG0FgD1g/yTHwUs/Jg9ZIU7WKj2/4IW9Lbb1WZbvck78W/lfGXFfe+u2EGfIJXdLQ==}
@@ -3789,6 +3789,7 @@ packages:
     resolution: {integrity: sha512-nekiGu2NDb1BcVofVcEKMIwzlx4NjHlcjhoxxKBNLtz15Y1z7MYf549DFvkHSId02Ax6kGwWntIBPC3l/JZcmw==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
 
   /@types/prop-types@15.7.10:
     resolution: {integrity: sha512-mxSnDQxPqsZxmeShFH+uwQ4kO4gcJcGahjjMFeLbKE95IAZiiZyiEepGZjtXJ7hN/yfu0bu9xN2ajcU0JcxX6A==}
@@ -3815,7 +3816,7 @@ packages:
 
   /@types/uuid@9.0.7:
     resolution: {integrity: sha512-WUtIVRUZ9i5dYXefDEAI7sh9/O7jGvHg7Df/5O/gtH3Yabe5odI3UWopVR1qbPXQtvOxWu3mM4XxlYeZtMWF4g==}
-    dev: false
+    dev: true
 
   /@typescript-eslint/parser@6.10.0(eslint@8.53.0)(typescript@5.2.2):
     resolution: {integrity: sha512-+sZwIj+s+io9ozSxIWbNB5873OSdfeBEH/FR0re14WLI6BaKuSOnnwCJ2foUiu8uXf4dRp1UqHP0vrZ1zXGrog==}
@@ -9017,6 +9018,7 @@ packages:
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+    dev: true
 
   /undici@5.26.5:
     resolution: {integrity: sha512-cSb4bPFd5qgR7qr2jYAi0hlX9n5YKK2ONKkLFkxl+v/9BvC0sOpZjBHDBSXc5lWAf5ty9oZdRXytBIHzgUcerw==}
