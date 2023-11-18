@@ -12,5 +12,5 @@ export const LoginSchema = object({
   email: string([toTrimmed(), email()]),
   password: string([toTrimmed(), minLength(8)]),
   name: optional(string([toTrimmed(), minLength(3)])),
-  role: enumType(["companyAdmin", "employee", "user", "siteAdmin"]),
+  role: optional(enumType(["companyAdmin", "employee", "user", "siteAdmin"])),
 });
