@@ -20,5 +20,5 @@ export default async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/dashboard*", "/api/temp", "/api/calculator"],
+  matcher: ["/api/temp", "/api/calculator"],
 };
