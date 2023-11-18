@@ -149,4 +149,5 @@ def update_and_get_clusters():
 def hello_world():
     return "<p>Welcome to our API!</p>"
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run()
