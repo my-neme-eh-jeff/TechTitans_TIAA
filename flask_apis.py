@@ -12,7 +12,9 @@ import pandas as pd
 from sklearn.cluster import AffinityPropagation
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from dotenv import load_dotenv
+import gc
 import re
+from sklearn.metrics import silhouette_score
 
 app = Flask(__name__)
 
@@ -24,7 +26,71 @@ class ChatInput:
         self.topic = topic
         self.query = query
 
-@app.route('/chat', methods=['GET'])
+@app.route("/retirement-calculator", methods=['GET'])
+def retirement_calculator():
+    csv_file_path = "./retirement_plans.csv"
+    openai_api_key = os.environ.get('OPENAI_API_KEY')
+    # os.environ["OPENAI_API_KEY"] = openai_api_key
+    # llm = OpenAI(openai_api_key=openai_api_key)
+    loader = CSVLoader(file_path=csv_file_path, encoding="utf-8")
+    data = loader.load()
+    embeddings = OpenAIEmbeddings()
+    vectors = FAISS.from_documents(data, embeddings)
+
+    salary = float(request.args.get('salary'))
+    current_age = int(request.args.get('current_age'))
+    goal_retirement_age = int(request.args.get('goalRetirementAge'))
+    work_experience = int(request.args.get('workExperience'))
+    safety_in_retirement = request.args.get('safetyInRetirement')
+    type_of_retirement = request.args.get('typeOfRetirement')
+    inflation_rate = float(request.args.get('inflation_rate'))
+    current_net_worth = float(request.args.get('currentNetWorth'))
+    no_of_dependents = int(request.args.get('noOfDependents'))
+
+    profile = {
+      'salary': salary,
+      'current_age': current_age,
+      'goalRetirementAge': goal_retirement_age,
+      'workExperience': work_experience,
+      'safetyInRetirement': safety_in_retirement,
+      'typeOfRetirement': type_of_retirement,
+      'inflation_rate': inflation_rate,
+      'currentNetWorth': current_net_worth,
+      'noOfDependents': no_of_dependents
+    }
+  
+    load_dotenv()
+    question = f"My current salary is {profile['salary']} per month. I have work experience of {profile['workExperience']} years. I want to retire by {profile['goalRetirementAge']}. I want {profile['safetyInRetirement']} type of safety in my retirement plan, of the type '{profile['typeOfRetirement']}'. The current inflation rate is {profile['inflation_rate']}. My current Net Worth is {profile['currentNetWorth']}. I have {profile['noOfDependents']} people that are dependent on me in my family. Suggest me a plan that fits for my current age, keeps my current salary and net worth in mind, and gives me the best possible returns at the end of the tenure. Limit the output to 300 characters."
+
+    chain = ConversationalRetrievalChain.from_llm(
+        llm=ChatOpenAI(temperature=0.8, model_name='gpt-3.5-turbo', openai_api_key=openai_api_key),
+        retriever=vectors.as_retriever()
+        )
+    plan = chain({"question": question, "chat_history": ""})
+
+    # Calculate Retirement Returns
+    time = profile['goalRetirementAge'] - profile['current_age']
+    rate = 0
+    if profile['safetyInRetirement'] == 'Cautious':
+        rate = 0.07
+    elif profile['safetyInRetirement'] == 'Daring':
+        rate = 0.12
+    else: 
+        rate = 0.09
+    match = re.search(re.compile(r'₹([0-9,]+)'), plan['answer'])
+    if match:
+        matched_string = match.group(1)
+        investment = int(matched_string.replace(',', ''))
+    else:
+        investment = 30000
+    future_value = 0
+    for year in range(1, time + 1):
+        future_value += investment * (1 + rate)**(time - year)
+    future_value = int(future_value)
+
+    return jsonify({"plan": plan['answer'], "investment": investment, "time": time, "returns": future_value})
+
+@app.route('/chat', methods=['POST'])
 def conversational_chat():
     csv_file_path = "./retirement_plans.csv"
     openai_api_key = os.environ.get('OPENAI_API_KEY')
@@ -63,13 +129,13 @@ def conversational_chat():
         user_chats = supabase_client.table('chats').select('id').filter('user_id', 'eq', data['user_id']).execute()
         max_chat_id = max([chat['chat_id'] for chat in user_chats]) + 1 if user_chats.count else 1
         data['chat_id'] = max_chat_id
-        
+
         question = data['query']
         prompt = PromptTemplate.from_template(template)
         formatted_prompt = prompt.format(question=question)
         chain1 = LLMChain(llm=llm, prompt=prompt)
         res = chain1.run(formatted_prompt)
-        
+
         supabase_client.table('chats').upsert([{
             'id': data['chat_id'],
             'user_id': data['user_id'],
@@ -82,7 +148,7 @@ def conversational_chat():
         topic=data['topic'],
         query=data['query']
     )
-    
+
     history = supabase_client.table('messages').select('messages').filter('chat_id', 'eq', chat_input.chat_id).execute()
     history=history.data
     history = ast.literal_eval(history[0]['messages']) if history else []
@@ -94,51 +160,8 @@ def conversational_chat():
             'messages': updated_history,
         }]
     ).execute()
-
+    print("CHATTED -"*50)
     return jsonify({"user_id": chat_input.user_id, "chat_id": chat_input.chat_id, "response": result["answer"]})
-
-@app.route("/retirement-calculator", methods=['GET'])
-def retirement_calculator():
-    csv_file_path = "./retirement_plans.csv"
-    openai_api_key = os.environ.get('OPENAI_API_KEY')
-    # os.environ["OPENAI_API_KEY"] = openai_api_key
-    # llm = OpenAI(openai_api_key=openai_api_key)
-    loader = CSVLoader(file_path=csv_file_path, encoding="utf-8")
-    data = loader.load()
-    embeddings = OpenAIEmbeddings()
-    vectors = FAISS.from_documents(data, embeddings)
-
-    profile = request.get_json()
-    load_dotenv()
-    question = f"My current salary is {profile['salary']} per month. I have work experience of {profile['workExperience']} years. I want to retire by {profile['goalRetirementAge']}. I want {profile['safetyInRetirement']} type of safety in my retirement plan, of the type '{profile['typeOfRetirement']}'. The current inflation rate is {profile['inflation_rate']}. My current Net Worth is {profile['currentNetWorth']}. I have {profile['noOfDependents']} people that are dependent on me in my family. Suggest me a plan that fits for my current age, keeps my current salary and net worth in mind, and gives me the best possible returns at the end of the tenure. Limit the output to 300 characters."
-
-    chain = ConversationalRetrievalChain.from_llm(
-        llm=ChatOpenAI(temperature=0.8, model_name='gpt-3.5-turbo', openai_api_key=openai_api_key),
-        retriever=vectors.as_retriever()
-        )
-    plan = chain({"question": question, "chat_history": ""})
-
-    # Calculate Retirement Returns
-    time = profile['goalRetirementAge'] - profile['current_age']
-    rate = 0
-    if profile['safetyInRetirement'] == 'Cautious':
-        rate = 0.07
-    elif profile['safetyInRetirement'] == 'Daring':
-        rate = 0.12
-    else: 
-        rate = 0.09
-    match = re.search(re.compile(r'₹([0-9,]+)'), plan['answer'])
-    if match:
-        matched_string = match.group(1)
-        investment = int(matched_string.replace(',', ''))
-    else:
-        investment = 30000
-    future_value = 0
-    for year in range(1, time + 1):
-        future_value += investment * (1 + rate)**(time - year)
-    future_value = int(future_value)
-
-    return jsonify({"plan": plan['answer'], "investment": investment, "time": time, "returns": future_value})
 
 def perform_clustering(user_id):
     load_dotenv()
@@ -174,15 +197,14 @@ def perform_clustering(user_id):
 
     clusters = {}
     for cluster_label in df['cluster_label'].unique():
-        cluster_content = df[df['cluster_label'] == cluster_label][['user_id']].to_dict(orient='records')
+        cluster_content = df[df['cluster_label'] == cluster_label]['user_id'].to_list()
         clusters[str(cluster_label)] = cluster_content
-
+    print(clusters)
     for num, cluster in clusters.items():
-        if user_id in cluster[0].values():
-            return cluster[0]
-    
-    return None
+        if user_id in cluster:
+            return cluster
 
+    return None
 
 @app.route("/update-and-get-clusters", methods=['GET'])
 def update_and_get_clusters():
@@ -190,7 +212,7 @@ def update_and_get_clusters():
     clusters = perform_clustering(user_id)
 
     return jsonify({"forum": clusters})
-
+  
 @app.route("/get-info", methods=['GET'])
 def get_info():
     user_id = request.args.get('user_id')
@@ -206,10 +228,16 @@ def get_info():
     df = pd.DataFrame(profiles)
 
     return jsonify({"info": df.to_dict(orient='records')})
-
 @app.route("/")
 def hello_world():
     return "<p>Welcome to our API!</p>"
 
+def keep_alive():
+  t=Thread(target=run)
+  t.start()
+  print("Alive")
+  return True
+  
 if __name__ == '__main__':
-    app.run()
+  app.run(host='0.0.0.0',port=8080)
+  keep_alive()
