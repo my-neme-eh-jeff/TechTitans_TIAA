@@ -110,11 +110,10 @@ def retirement_calculator():
 
     profile = request.get_json()
     load_dotenv()
-
-    question = f"My current salary is {profile['salary']}. I have work experience of {profile['workExperience']} years. My current age is {profile['current_age']}. I want to retire by {profile['goalRetirementAge']}. I want {profile['safetyInRetirement']} type of safety in my retirement plan, of the type '{profile['typeOfRetirement']}'. The current inflation rate is {profile['inflation_rate']}. My current Net Worth is {profile['currentNetWorth']}. I have {profile['noOfDependents']} people that are dependent on me in my family. Suggest me a retirement plan. Limit the output to 300 characters."
+    question = f"My current salary is {profile['salary']} per month. I have work experience of {profile['workExperience']} years. I want to retire by {profile['goalRetirementAge']}. I want {profile['safetyInRetirement']} type of safety in my retirement plan, of the type '{profile['typeOfRetirement']}'. The current inflation rate is {profile['inflation_rate']}. My current Net Worth is {profile['currentNetWorth']}. I have {profile['noOfDependents']} people that are dependent on me in my family. Suggest me a plan that fits for my current age, keeps my current salary and net worth in mind, and gives me the best possible returns at the end of the tenure. Limit the output to 300 characters."
 
     chain = ConversationalRetrievalChain.from_llm(
-        llm=ChatOpenAI(temperature=0.0, model_name='gpt-3.5-turbo', openai_api_key=openai_api_key),
+        llm=ChatOpenAI(temperature=0.8, model_name='gpt-3.5-turbo', openai_api_key=openai_api_key),
         retriever=vectors.as_retriever()
         )
     plan = chain({"question": question, "chat_history": ""})
