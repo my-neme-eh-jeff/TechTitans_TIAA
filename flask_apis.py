@@ -15,10 +15,11 @@ from dotenv import load_dotenv
 import gc
 import re
 from sklearn.metrics import silhouette_score
-# from threading import Thread
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-
+cors=CORS(app)
+app.config['CORS_HEADERS']='Content-Type'
 
 class ChatInput:
     def __init__(self, user_id: int, chat_id: int, topic: str, query: str):
@@ -28,6 +29,7 @@ class ChatInput:
         self.query = query
 
 @app.route("/retirement-calculator", methods=['GET'])
+@cross_origin()
 def retirement_calculator():
     csv_file_path = "./retirement_plans.csv"
     openai_api_key = os.environ.get('OPENAI_API_KEY')
@@ -92,6 +94,7 @@ def retirement_calculator():
     return jsonify({"plan": plan['answer'], "investment": investment, "time": time, "returns": future_value})
 
 @app.route('/chat', methods=['POST'])
+@cross_origin()
 def conversational_chat():
     csv_file_path = "./retirement_plans.csv"
     openai_api_key = os.environ.get('OPENAI_API_KEY')
@@ -120,7 +123,7 @@ def conversational_chat():
 
     chain = ConversationalRetrievalChain.from_llm(
         llm=ChatOpenAI(temperature=0.0, model_name='gpt-3.5-turbo', openai_api_key=openai_api_key),
-        retriever=vectors.as_retriever()
+        retriever=vectors.as_retriever(), get_chat_history=lambda h : h
         )
 
     conversation_history = []
@@ -142,6 +145,7 @@ def conversational_chat():
             'user_id': data['user_id'],
             'topic': res,
         }]).execute()
+        data['topic']=res
 
     chat_input = ChatInput(
         user_id=data['user_id'],
@@ -152,8 +156,15 @@ def conversational_chat():
 
     history = supabase_client.table('messages').select('messages').filter('chat_id', 'eq', chat_input.chat_id).execute()
     history=history.data
-    history = ast.literal_eval(history[0]['messages']) if history else []
-    result = chain({"question": chat_input.query, "chat_history": conversation_history})
+    print(history)
+    print("-"*50)
+    # history = [ast.literal_eval(history[i]['messages']) for i in range(len(history))] if history else []
+    history=ast.literal_eval(history[-1]['messages']) if history else []
+    print(history)
+    print("-"*50)
+    print([list(hist.values()) for hist in history] if history else [])
+    print("-"*50)
+    result = chain({"question": chat_input.query, "chat_history": [list(hist.values()) for hist in history] if history else []})
     conversation_history.append((chat_input.query, result["answer"]))
     updated_history = history+[{"query": chat_input.query, "response": result["answer"], "timestamp": datetime.now().isoformat()}]
     supabase_client.table('messages').upsert([{
@@ -208,6 +219,7 @@ def perform_clustering(user_id):
     return None
 
 @app.route("/update-and-get-clusters", methods=['GET'])
+@cross_origin()
 def update_and_get_clusters():
     user_id = request.args.get('user_id')
     clusters = perform_clustering(user_id)
@@ -215,6 +227,7 @@ def update_and_get_clusters():
     return jsonify({"forum": clusters})
   
 @app.route("/get-info", methods=['GET'])
+@cross_origin()
 def get_info():
     user_id = request.args.get('user_id')
     load_dotenv()
@@ -229,7 +242,9 @@ def get_info():
     df = pd.DataFrame(profiles)
 
     return jsonify({"info": df.to_dict(orient='records')})
+  
 @app.route("/")
+@cross_origin()
 def hello_world():
     return "<p>Welcome to our API!</p>"
 
