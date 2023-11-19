@@ -129,11 +129,17 @@ def retirement_calculator():
     else: 
         rate = 0.09
     match = re.search(re.compile(r'₹([0-9,]+)'), plan['answer'])
-    matched_string = match.group(1)
-    investment = int(matched_string.replace(',', ''))
-    returns = int(investment * (1 + rate)**time)
+    if match:
+        matched_string = match.group(1)
+        investment = int(matched_string.replace(',', ''))
+    else:
+        investment = 30000
+    future_value = 0
+    for year in range(1, time + 1):
+        future_value += investment * (1 + rate)**(time - year)
+    future_value = int(future_value)
 
-    return jsonify({"plan": plan['answer'], "investment": investment, "time": time, "returns": returns})
+    return jsonify({"plan": plan['answer'], "investment": investment, "time": time, "returns": future_value})
 
 def perform_clustering(user_id):
     load_dotenv()
