@@ -84,14 +84,12 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
           password: data.password,
           callbackUrl: "/dashboard",
         });
-        if (!resp) {
-          toast.error("Server might be offline");
-        } else if (resp.ok) {
+        if (resp?.ok) {
           toast.success("Logged in successfully");
           router.push("/dashboard");
         } else {
-          toast.error(resp.error);
-          if (resp.error === "User not found") {
+          toast.error(resp?.error || "Unexpected error");
+          if (resp?.error === "User not found") {
             //redirect with email in parameters
             router.push(`/sign-up?email=${data.email}`);
           }

@@ -18,11 +18,18 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
   const { companyId, department, phoneNumber, position } = body;
-  const isValidData = safeParse(InsertEmployeeSchema, body);
+  console.log(body);
+  const isValidData = safeParse(InsertEmployeeSchema, {
+    companyId,
+    department,
+    phoneNumber,
+    position,
+    userId: id,
+  });
   if (!isValidData.success) {
     return NextResponse.json(
       {
-        error: "Invalid data",
+        error: isValidData.issues,
         success: false,
       },
       { status: 400 }
@@ -44,7 +51,7 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     return NextResponse.json(
       {
-        error: "Invalid data",
+        error: err,
         success: false,
       },
       { status: 400 }

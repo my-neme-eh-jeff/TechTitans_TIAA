@@ -1,5 +1,12 @@
 import { relations } from "drizzle-orm";
-import { timestamp, pgTable, text, serial, decimal } from "drizzle-orm/pg-core";
+import {
+  timestamp,
+  pgTable,
+  text,
+  serial,
+  decimal,
+  json,
+} from "drizzle-orm/pg-core";
 import { companyAdmin } from "../roleBased/companyAdmin";
 import { employee } from "../roleBased/employees";
 
@@ -15,10 +22,12 @@ export const company = pgTable("company", {
   industry: text("industry").notNull(),
 
   //12digit(precision).2digit(scale)
-  revenue: decimal("revenue", { precision: 12, scale: 2 }).notNull(),
-  expenses: decimal("expenses", { precision: 12, scale: 2 }).notNull(),
-  netIncome: decimal("netIncome", { precision: 12, scale: 2 }).notNull(),
-  currency: text("currency").notNull(),
+  //make these array of json 
+
+  totalRevenue: text("total_revenue"),
+  revenueFromUs: text("revenue_from_us"),
+  stockPrice: text("stock_price"),
+  numberOfRetirementPlans: text("number_of_retirement_plans"),
 
 
   createdAt: timestamp("created_at", { mode: "date", withTimezone: true })

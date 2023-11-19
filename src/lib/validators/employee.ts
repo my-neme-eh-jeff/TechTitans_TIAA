@@ -1,10 +1,9 @@
-import { createInsertSchema, createSelectSchema } from "drizzle-valibot";
-import { number, optional } from "valibot";
-import { employee } from "../db/schema/roleBased/employees";
+import { object, string } from "valibot";
 
-export const InsertEmployeeSchema = createInsertSchema(employee, {
-  id: optional(number()),
+export const InsertEmployeeSchema = object({
+  phoneNumber: string(),
+  companyId: string(),
+  userId: string(),
+  department: string(),
+  position: string(),
 });
-
-
-

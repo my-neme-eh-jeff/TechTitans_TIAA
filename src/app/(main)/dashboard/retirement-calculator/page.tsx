@@ -180,11 +180,12 @@ export default function ReitrementCalculator() {
                   handleChange("safetyInRetirement", e.target.value)
                 }
               >
-                {safetyInRetirementOptionsArray.map((option) => (
-                  <SelectItem key={option} value={option}>
-                    {option}
-                  </SelectItem>
-                ))}
+                {safetyInRetirementOptionsArray &&
+                  safetyInRetirementOptionsArray.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
               </Select>
               <Select
                 label="Type of Retirement"

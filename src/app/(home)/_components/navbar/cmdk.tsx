@@ -442,7 +442,7 @@ export const Cmdk: FC<{}> = () => {
             <Command.Input
               autoFocus={!isWebKit()}
               className={slots.input()}
-              placeholder="Search law"
+              placeholder="Search stock price, data, and more"
               value={query}
               onKeyDown={onInputKeyDown}
               onValueChange={setQuery}

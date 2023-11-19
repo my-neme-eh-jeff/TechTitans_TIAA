@@ -27,8 +27,8 @@ const titleVariants = tv({
       pink: "from-[#FF72E1] to-[#F54C7A]",
     },
     size: {
-      sm: "text-3xl md:text-4xl lg:text-5xl leading-7 xl:text-7xl",
-      md: "text-4xl md:text-5xl lg:text-6xl leading-8 xl:text-8xl",
+      sm: "text-3xl md:text-4xl lg:text-5xl leading-7 xl:text-6xl 2xl::text-7xl",
+      md: "text-4xl md:text-5xl lg:text-6xl leading-8 xl:text-7xl 2xl::text-8xl",
     },
     fullWidth: {
       true: "w-full block",

@@ -29,7 +29,7 @@ export default function Footer() {
       title: "Retirement Calculator",
       description: "Calculate your retirement corpus",
       icon: <Calculator />,
-      href: "/calculator",
+      href: "/dashboard/calculator",
     },
     {
       title: "Financial advice chatbot",

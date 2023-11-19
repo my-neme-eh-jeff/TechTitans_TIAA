@@ -79,7 +79,7 @@ function AboutSection() {
               data-aos-delay="1200"
               className="text-xl md:text-2xl text-zinc-500 text-center md:text-left"
             >
-              We use state of the art AI models to levarage this.
+              We use state of the art AI models to leverage this.
             </h2>
           </div>
         </div>

@@ -5,13 +5,13 @@ import {
   Head,
   Hr,
   Html,
-  Img,
   Link,
   Preview,
   Row,
   Section,
   Text,
 } from "@react-email/components";
+import { Img } from '@react-email/img';
 import * as React from "react";
 
 interface AirbnbReviewEmailProps {
@@ -41,7 +41,7 @@ export const InviteTemplateEmail = ({
           <Container style={container}>
             <Section>
               <Img
-                src={"../../assets/images/logo.png"}
+                src="apple-touch-icon.png"
                 width="180"
                 height="180"
                 alt="Retiral"
@@ -90,10 +90,7 @@ export const InviteTemplateEmail = ({
                   </Link>
                 </Text>
                 <Text>
-                  <Link
-                    href=""
-                    style={link}
-                  >
+                  <Link href="" style={link}>
                     How do star ratings work?
                   </Link>
                 </Text>

@@ -1,11 +1,10 @@
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { users } from "@/lib/db/schema/roleBased";
 import { employee } from "@/lib/db/schema/roleBased/employees";
 import { eq } from "drizzle-orm";
 import type { Session } from "next-auth";
 import EmployeeForm from "./EmployeeForm";
-import CompanyStats from "../charts";
+import CompanyStats from "../../../../(timepass)/analytics";
 
 export default async function EmployeeDashboard() {
   const session = (await getAuthSession()) as Session;
@@ -13,7 +12,7 @@ export default async function EmployeeDashboard() {
     await db.select().from(employee).where(eq(employee.userId, session.user.id))
   )[0];
 
-  return !Currentemployee?.id ? (
+  return Currentemployee?.status !== "approved" ? (
     <div className="w-full flex overflow-hidden">
       <section className="px-4 py-12 mx-auto max-w-lg mt-28 md:max-w-xl lg:max-w-7xl sm:px-16 md:px-12 lg:px-24 lg:py-24">
         <div className="justify-center p-14 pt-10 bg-stone-300 dark:bg-stone-900 mx-auto text-left align-bottom transition-all transform group rounded-xl sm:align-middle ">

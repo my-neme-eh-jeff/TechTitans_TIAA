@@ -14,21 +14,24 @@ export default function EmployeeForm() {
     phoneNumber: "",
     location: "",
     companyName: "",
+    companyId: "",
   };
-  const [autoCompleteData, setAutoCompleteData] = useState<Array<string>>([]);
+  const [autoCompleteData, setAutoCompleteData] = useState<any>([]);
   const [employeeFormLoading, setEmployeeFormLoading] = useState(false);
   const [formData, setFormData] = useState(initialData);
   const handleChange = (field: keyof typeof initialData, newValue: string) => {
     setFormData((prevData) => ({ ...prevData, [field]: newValue }));
   };
+  const [loading, setLoading] = useState(true);
+
   const handlingEmployeeFormSubmission = async () => {
     const isFormDataValid = safeParse(InsertEmployeeSchema, {
       formData,
     });
-    if (!isFormDataValid) {
-      toast.error("Please fill all the fields");
-      return;
-    }
+    // if (isFormDataValid.success) {
+    //   toast.error("Please fill all the fields");
+    //   return;
+    // }
     const resp = await axios.post("/api/employee-verification", formData);
     if (resp.data.success) {
       toast.success("Employee data saved successfully");
@@ -40,11 +43,14 @@ export default function EmployeeForm() {
   useEffect(() => {
     async function getCompanyData() {
       try {
+        setLoading(true);
         const resp = await axios.get("/api/get-company-data");
         setAutoCompleteData(resp.data.data);
+        console.log(resp.data.data);
       } catch (err) {
         console.log(err);
       } finally {
+        setLoading(false);
       }
     }
     getCompanyData();
@@ -58,15 +64,24 @@ export default function EmployeeForm() {
           required
           className="mx-auto"
           labelPlacement="outside"
+          isLoading={autoCompleteData.length === 0}
           label="Compnay name"
-          value={formData.companyName}
-          onChange={(e) => handleChange("companyName", e.target.value)}
+          value={initialData.companyName}
+          onSelectionChange={(e) => {
+            handleChange("companyName", e as string);
+            autoCompleteData.map((data: any) => {
+              if (data.name === e) {
+                handleChange("companyId", data.id);
+              }
+            });
+          }}
         >
-          {autoCompleteData.map((item) => (
-            <AutocompleteItem key={item} value={item}>
-              {item}
-            </AutocompleteItem>
-          ))}
+          {!loading &&
+            autoCompleteData.map((item: any) => (
+              <AutocompleteItem key={item.name} value={item.name}>
+                {item.name as string}
+              </AutocompleteItem>
+            ))}
         </Autocomplete>
       </div>
 
@@ -84,13 +99,13 @@ export default function EmployeeForm() {
         />
         <Input
           label="PhoneNumber"
-          value={formData.department}
+          value={formData.phoneNumber}
           onChange={(e) => handleChange("phoneNumber", e.target.value)}
         />
         <Input
           label="Location"
           required
-          value={formData.department}
+          value={formData.location}
           onChange={(e) => handleChange("location", e.target.value)}
         />
       </div>

@@ -5,7 +5,6 @@ import { getAuthSession } from "@/lib/auth";
 import jwt from "jsonwebtoken";
 import { db } from "@/lib/db";
 import { profile } from "@/lib/db/schema/roleBased";
-import axios from "axios";
 
 export async function POST(req: NextRequest) {
   const session = await getAuthSession();
@@ -28,7 +27,6 @@ export async function POST(req: NextRequest) {
       typeOfRetirement,
       numberOfDependantPeople,
       totalValuationOfCurrentAssets,
-      saveToProfile,
     } = body;
     const isFormDataValid = safeParse(CalculatorSchema, {
       salary,
@@ -46,7 +44,6 @@ export async function POST(req: NextRequest) {
         error: "Invalid data",
       });
     }
-
     const dbResponse = await db.insert(profile).values({
       age,
       goalRetirementAge,
