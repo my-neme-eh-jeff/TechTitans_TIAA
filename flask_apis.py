@@ -12,6 +12,7 @@ import pandas as pd
 from sklearn.cluster import AffinityPropagation
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from dotenv import load_dotenv
+import re
 
 app = Flask(__name__)
 
@@ -118,7 +119,21 @@ def retirement_calculator():
         )
     plan = chain({"question": question, "chat_history": ""})
 
-    return jsonify({"output": plan['answer']})
+    # Calculate Retirement Returns
+    time = profile['goalRetirementAge'] - profile['current_age']
+    rate = 0
+    if profile['safetyInRetirement'] == 'Cautious':
+        rate = 0.07
+    elif profile['safetyInRetirement'] == 'Daring':
+        rate = 0.12
+    else: 
+        rate = 0.09
+    match = re.search(re.compile(r'₹([0-9,]+)'), plan['answer'])
+    matched_string = match.group(1)
+    investment = int(matched_string.replace(',', ''))
+    returns = int(investment * (1 + rate)**time)
+
+    return jsonify({"plan": plan['answer'], "investment": investment, "time": time, "returns": returns})
 
 def perform_clustering(user_id):
     load_dotenv()
