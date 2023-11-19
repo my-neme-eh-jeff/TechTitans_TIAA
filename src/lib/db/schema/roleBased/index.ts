@@ -46,16 +46,22 @@ export const usersRelations = relations(users, ({ one, many }) => ({
   }),
 }));
 
-export const safetyEnum = pgEnum("safety", [
-  "Cautious",
-  "Middle-of-the-road",
-  "Daring",
-]);
-export const typeOfRetirementEnum = pgEnum("typeOfRetirement", [
+export const typeOfRetirementOptionsArray = [
   "Like a king/queen",
   "I am happy the way i am",
   "Like a monk",
-]);
+] as const;
+export const safetyInRetirementOptionsArray = [
+  "Cautious",
+  "Middle-of-the-road",
+  "Daring",
+] as const;
+export const safetyEnum = pgEnum("safety", safetyInRetirementOptionsArray);
+export const typeOfRetirementEnum = pgEnum(
+  "typeOfRetirement",
+  typeOfRetirementOptionsArray
+);
+
 export const profile = pgTable("profile", {
   id: serial("id").notNull().primaryKey(),
   userId: text("user_id")
@@ -71,6 +77,11 @@ export const profile = pgTable("profile", {
   goalRetirementAge: integer("goal_retirement_age").notNull(),
   safetyInRetirement: safetyEnum("safety_in_retirement").notNull(),
   typeOfRetirement: typeOfRetirementEnum("type_of_retirement").notNull(),
+  numberOfDependantPeople: integer("number_of_dependant_people").notNull(),
+  totalValuationOfCurrentAssets: decimal("total_valuation_of_current_assets", {
+    precision: 12,
+    scale: 2,
+  }).notNull(),
 
   createdAt: timestamp("created_at", { mode: "date", withTimezone: true })
     .notNull()

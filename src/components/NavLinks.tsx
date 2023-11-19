@@ -61,6 +61,10 @@ export type NavbarLinksForDashboardAdminType =
 
 export const navbarLinksForDashboardEmployee = [
   {
+    title: "Dashboard",
+    href: "/dashboard",
+  },
+  {
     title: "Chatbot",
     href: "/dashboard/chatbot",
   },

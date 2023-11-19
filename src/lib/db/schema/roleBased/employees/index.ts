@@ -1,7 +1,19 @@
-import { timestamp, pgTable, text, serial, integer } from "drizzle-orm/pg-core";
+import {
+  timestamp,
+  pgTable,
+  text,
+  serial,
+  integer,
+  pgEnum,
+} from "drizzle-orm/pg-core";
 import { users } from "..";
 import { company } from "../../company";
 import { relations } from "drizzle-orm";
+
+export const statusEnum = pgEnum("status", [
+  "approved",
+  "pending",
+]);
 
 export const employee = pgTable("employee", {
   id: serial("id").notNull().primaryKey(),
@@ -12,7 +24,9 @@ export const employee = pgTable("employee", {
     .notNull()
     .references(() => company.id, { onDelete: "cascade" }),
   position: text("position").notNull(),
+  phoneNumber: text("phone_number").notNull(),
   department: text("department").notNull(),
+  status: statusEnum("status").default("pending"),
   createdAt: timestamp("created_at", { mode: "date", withTimezone: true })
     .notNull()
     .defaultNow(),

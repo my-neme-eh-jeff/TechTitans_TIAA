@@ -48,6 +48,7 @@ export async function POST(req: Request) {
           message: "User Logged In",
           token: token,
           name: userExistsOrNot[0].name,
+          userId: userExistsOrNot[0].id,
         });
         // resp.cookies.set("next-auth.session-token", token);
         return resp;

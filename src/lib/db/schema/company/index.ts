@@ -7,7 +7,7 @@ export const company = pgTable("company", {
   id: serial("id").notNull().primaryKey(),
   name: text("name").notNull(),
   description: text("description").notNull(),
-  logo: text("logo").notNull(),
+  logo: text("logo"),
   website: text("website").notNull(),
   address: text("address").notNull(),
   phone: text("phone").notNull(),
@@ -19,6 +19,7 @@ export const company = pgTable("company", {
   expenses: decimal("expenses", { precision: 12, scale: 2 }).notNull(),
   netIncome: decimal("netIncome", { precision: 12, scale: 2 }).notNull(),
   currency: text("currency").notNull(),
+
 
   createdAt: timestamp("created_at", { mode: "date", withTimezone: true })
     .notNull()
