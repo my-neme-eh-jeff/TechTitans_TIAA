@@ -15,6 +15,7 @@ from dotenv import load_dotenv
 import gc
 import re
 from sklearn.metrics import silhouette_score
+# from threading import Thread
 
 app = Flask(__name__)
 
@@ -232,12 +233,12 @@ def get_info():
 def hello_world():
     return "<p>Welcome to our API!</p>"
 
-def keep_alive():
-  t=Thread(target=run)
-  t.start()
-  print("Alive")
-  return True
+# def keep_alive():
+#   t=Thread(target=run)
+#   t.start()
+#   print("Alive")
+#   return True
   
 if __name__ == '__main__':
   app.run(host='0.0.0.0',port=8080)
-  keep_alive()
+#   keep_alive()
