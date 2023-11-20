@@ -1,5 +1,5 @@
 //third party
-import { Instagram, Twitter, Calculator, Bot, Scale } from "lucide-react";
+import { Instagram, Twitter, Calculator, Bot, Scale, BarChart3 } from "lucide-react";
 import { Link } from "@nextui-org/link";
 import { Divider } from "@nextui-org/divider";
 
@@ -38,8 +38,10 @@ export default function Footer() {
       href: "/dashboard/chatbot",
     },
     {
-      title:"",
-      
+      title:"Analysics",
+      description:"Get insights about how our AI models helped grow various companies",
+      icon :<BarChart3 />,
+      href:"/analytics"
     }
   ] as const;
 
