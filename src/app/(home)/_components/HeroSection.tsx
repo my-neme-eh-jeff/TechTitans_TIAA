@@ -133,6 +133,7 @@ function HeroSection() {
           >
             <Link
               as={NextLink}
+              about="Find out why you should care about us"
               href={"/analytics"}
               className={buttonStyles({
                 color: "success",

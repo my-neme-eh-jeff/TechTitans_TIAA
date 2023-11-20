@@ -9,6 +9,9 @@ import {
 } from "drizzle-orm/pg-core";
 import { companyAdmin } from "../roleBased/companyAdmin";
 import { employee } from "../roleBased/employees";
+import {
+  type InferSelectModel,
+} from "drizzle-orm";
 
 export const company = pgTable("company", {
   id: serial("id").notNull().primaryKey(),
@@ -37,6 +40,8 @@ export const company = pgTable("company", {
     .notNull()
     .defaultNow(),
 });
+export type SelectCompany = InferSelectModel<typeof company>;
+
 
 export const companyRelations = relations(company, ({ one, many }) => ({
   companyToAdmin: many(companyAdmin),

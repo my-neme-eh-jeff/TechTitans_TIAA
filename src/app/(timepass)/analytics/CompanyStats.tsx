@@ -2,6 +2,11 @@
 import { ButtonGroup, Button } from "@nextui-org/button";
 import { useEffect, useState } from "react";
 import { BarChart } from "./Charts";
+import axios from "axios";
+import { Spinner } from "@nextui-org/react";
+import { type SelectCompany } from "@/lib/db/schema/company";
+
+export const dynamic = "force-dynamic";
 
 export default function CompanyStats() {
   const typesOfRevenue = [
@@ -21,9 +26,24 @@ export default function CompanyStats() {
   const [typeOfRevenue, setTypeOfRevenue] = useState<
     (typeof typesOfRevenue)[number]
   >(typesOfRevenue[0]);
+  const [companyData, setCompanyData] = useState<SelectCompany[]>();
+  const [loadingForCompanyData, setLoadingForCompanyData] = useState(true);
 
   useEffect(() => {
-    console.log(typeOfRevenue);
+    async function getData() {
+      try {
+        setLoadingForCompanyData(true);
+        const resp = await axios.get("/api/get-company-data");
+        setCompanyData(resp.data.data as SelectCompany[]);
+        console.log(resp.data.data);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoadingForCompanyData(false);
+      }
+    }
+
+    getData();
   }, []);
 
   return (
@@ -45,7 +65,13 @@ export default function CompanyStats() {
             ))}
           </ButtonGroup>
           <div className="w-full">
-            <BarChart  />
+            {loadingForCompanyData ? (
+              <div className="w-full h-96 flex justify-center items-center">
+                <Spinner />
+              </div>
+            ) : (
+              <BarChart />
+            )}
           </div>
         </div>
       </div>
