@@ -9,6 +9,7 @@ import {
   BarElement,
   Title,
 } from "chart.js";
+import { useEffect } from "react";
 
 ChartJS.register(
   CategoryScale,

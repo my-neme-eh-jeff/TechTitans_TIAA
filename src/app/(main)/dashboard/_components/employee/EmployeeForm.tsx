@@ -67,7 +67,7 @@ export default function EmployeeForm() {
           className="mx-auto"
           labelPlacement="outside"
           isLoading={loading}
-          label="Compnay name"
+          label="Companay name"
           value={initialData.companyName}
           onSelectionChange={(e) => {
             handleChange("companyName", e as string);
@@ -78,13 +78,15 @@ export default function EmployeeForm() {
             });
           }}
         >
-          {!loading &&
-            autoCompleteData[0]?.id &&
+          {!loading && autoCompleteData[0]?.id ? (
             autoCompleteData.map((item: any) => (
               <AutocompleteItem key={item.name} value={item.name}>
                 {item.name as string}
               </AutocompleteItem>
-            ))}
+            ))
+          ) : (
+            <AutocompleteItem key={""}></AutocompleteItem>
+          )}
         </Autocomplete>
       </div>
 
