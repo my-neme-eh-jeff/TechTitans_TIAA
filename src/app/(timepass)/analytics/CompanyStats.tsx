@@ -27,7 +27,7 @@ export default function CompanyStats() {
               </Button>
             ))}
           </ButtonGroup>
-          <div>
+          <div className="w-full">
             <BarChart />
           </div>
         </div>

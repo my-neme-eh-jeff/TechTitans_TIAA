@@ -17,7 +17,7 @@ export default async function AnalystisPage() {
           companies
         </h3>
       </div>
-      <div>
+      <div >
         <CompanyStats />
       </div>
     </div>

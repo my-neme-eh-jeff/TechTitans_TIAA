@@ -77,7 +77,7 @@ export default function EmployeeForm() {
           }}
         >
           {!loading &&
-            autoCompleteData[0].id &&
+            autoCompleteData[0]?.id &&
             autoCompleteData.map((item: any) => (
               <AutocompleteItem key={item.name} value={item.name}>
                 {item.name as string}
