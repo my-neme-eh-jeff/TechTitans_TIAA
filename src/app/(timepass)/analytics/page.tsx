@@ -13,7 +13,7 @@ export default async function AnalystisPage() {
           Here&apos; why you should partner with us
         </h1>
         <h3 className="text-3xl md:text-4xl lg:text-5xl  text-zinc-500 ">
-          These are certain real time statisctics of how we helped grow other
+          These are certain real time statistics of how we helped grow other
           companies
         </h3>
       </div>

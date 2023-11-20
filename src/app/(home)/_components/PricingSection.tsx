@@ -32,19 +32,19 @@ function PricingSection() {
       features: [
         {
           availible: true,
-          text: "Chatbot for providing legal advice",
+          text: "Retirement calculator",
         },
         {
           availible: true,
-          text: "Lawyer matching for better success",
+          text: "Interact in user forums",
         },
         {
           availible: true,
-          text: "Case file security",
+          text: "Financial advice chatbot",
         },
         {
-          availible: true,
-          text: "Virtual AI enviourment for lawyer",
+          availible: false,
+          text: "Data driven insights for future planning",
         },
       ],
     },

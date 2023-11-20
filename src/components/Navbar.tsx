@@ -44,7 +44,9 @@ export default async function Navbar() {
               </Link>
             </NavbarItem>
           ))}
-        {(auth.user.role === "employee" || auth.user.role === "siteAdmin") &&
+        {(auth.user.role === "employee" ||
+          auth.user.role === "siteAdmin" ||
+          auth.user.role === "user") &&
           navbarLinksForDashboardEmployee.map((navbarLink, index) => (
             <NavbarItem key={index}>
               <Link

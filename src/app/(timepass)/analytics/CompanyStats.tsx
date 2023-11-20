@@ -9,7 +9,7 @@ import { type SelectCompany } from "@/lib/db/schema/company";
 export const dynamic = "force-dynamic";
 
 export default function CompanyStats() {
-  const typesOfRevenue = [
+  const typesOfRevenueArray = [
     {
       title: "Total Revenue",
       value: "totalRevenue",
@@ -22,20 +22,77 @@ export default function CompanyStats() {
       title: "Previous Revenue",
       value: "previousRevenue",
     },
-  ] as const;
-  const [typeOfRevenue, setTypeOfRevenue] = useState<
-    (typeof typesOfRevenue)[number]
-  >(typesOfRevenue[0]);
+  ];
+  const [typeOfRevenue, setTypeOfRevenue] = useState({
+    title: "Total Revenue",
+    value: "totalRevenue",
+  });
   const [companyData, setCompanyData] = useState<SelectCompany[]>();
   const [loadingForCompanyData, setLoadingForCompanyData] = useState(true);
+  type CompanyData = {
+    totalRevenue: [
+      {
+        time: string;
+        total_revenue: string;
+      }
+    ];
+    revenueFromUs: [
+      {
+        time: string;
+        revenue_from_us: string;
+      }
+    ];
+    stockPrice: [
+      {
+        time: string;
+        stock_price: string;
+      }
+    ];
+    numberOfRetirementPlans: [
+      {
+        time: string;
+        number_of_retiremnt_plans: string;
+      }
+    ];
+    id: number;
+    name: string;
+    description: string;
+    logo: string | null;
+    website: string;
+    address: string;
+    phone: string;
+    email: string;
+  };
 
   useEffect(() => {
     async function getData() {
       try {
         setLoadingForCompanyData(true);
-        const resp = await axios.get("/api/get-company-data");
-        setCompanyData(resp.data.data as SelectCompany[]);
-        console.log(resp.data.data);
+        const { data } = await axios.get("/api/get-company-data");
+        const finalData = data.data as SelectCompany[];
+        const temp = finalData.map((company) => {
+          //convert string to array of objects for revenueFromUs, StockPrice, totalRevenue, numberOfRetirementPlans
+          const revenueFromUs = JSON.parse(
+            company.revenueFromUs as string
+          ) as CompanyData["revenueFromUs"];
+          const stockPrice = JSON.parse(
+            company.stockPrice as string
+          ) as CompanyData["stockPrice"];
+          const totalRevenue = JSON.parse(
+            company.totalRevenue as string
+          ) as CompanyData["totalRevenue"];
+          const numberOfRetirementPlans = JSON.parse(
+            company.numberOfRetirementPlans as string
+          ) as CompanyData["numberOfRetirementPlans"];
+          return {
+            ...company,
+            revenueFromUs,
+            stockPrice,
+            totalRevenue,
+            numberOfRetirementPlans,
+          };
+        });
+        setCompanyData(finalData);
       } catch (err) {
         console.log(err);
       } finally {
@@ -46,19 +103,27 @@ export default function CompanyStats() {
     getData();
   }, []);
 
+  useEffect(() => {
+    console.log(companyData);
+  }, [companyData]);
+
   return (
     <div className="w-full flex flex-col">
       <div className="flex flex-row">
-        <h1 className="text-xl sm:text-2xl md:text-3xl my-auto">
+        <h1 className="text-xl sm:text-2xl md:text-3xl my-auto mr-16">
           Heres how our AI models helped grow various companies
         </h1>
         <div className="flex flex-col min-w-[50%]">
           <ButtonGroup>
-            {typesOfRevenue.map((type) => (
+            {typesOfRevenueArray.map((type) => (
               <Button
                 key={type.value}
-                onClick={() => setTypeOfRevenue(type)}
-                color={typeOfRevenue === type ? "success" : "default"}
+                onClick={(e) => {
+                  setTypeOfRevenue(type);
+                }}
+                color={
+                  typeOfRevenue.value === type.value ? "success" : "default"
+                }
               >
                 {type.title}
               </Button>
@@ -70,7 +135,7 @@ export default function CompanyStats() {
                 <Spinner />
               </div>
             ) : (
-              <BarChart />
+              <BarChart typesOfRevenue={typeOfRevenue.value} />
             )}
           </div>
         </div>

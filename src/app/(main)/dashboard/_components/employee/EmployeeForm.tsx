@@ -67,7 +67,7 @@ export default function EmployeeForm() {
           className="mx-auto"
           labelPlacement="outside"
           isLoading={loading}
-          label="Companay name"
+          label="Company name"
           value={initialData.companyName}
           onSelectionChange={(e) => {
             handleChange("companyName", e as string);

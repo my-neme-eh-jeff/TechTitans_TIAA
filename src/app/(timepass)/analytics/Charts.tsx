@@ -21,7 +21,11 @@ ChartJS.register(
 
 import { Bar } from "react-chartjs-2";
 
-export const BarChart = () => {
+type BarChartPropType = {
+  typesOfRevenue: string;
+};
+
+export const BarChart = ({ typesOfRevenue }: BarChartPropType) => {
   const labels = [
     "January",
     "February",
@@ -30,19 +34,38 @@ export const BarChart = () => {
     "May",
     "June",
     "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
   const data = {
     labels,
     datasets: [
       {
-        label: "Dataset 1",
-        data: labels.map(() => Math.floor(Math.random() * 10) + 1),
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-      },
-      {
-        label: "Dataset 2",
-        data: labels.map(() => Math.floor(Math.random() * 10) + 1),
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        label: `${
+          typesOfRevenue === "totalRevenue"
+            ? "Total Revenue ₹"
+            : typesOfRevenue === "revenueFromUs ₹"
+            ? "Revenue From Us ₹"
+            : "Previous Revenue ₹"
+        }`,
+        data: labels.map(() =>
+          typesOfRevenue === "totalRevenue"
+            ? Math.floor(Math.random() * 10000000000)
+            : typesOfRevenue === "revenueFromUs"
+            ? Math.floor(Math.random() * 10000000)
+            : Math.floor(Math.random() * 100000)
+        ),
+        backgroundColor: `${
+          typesOfRevenue === "totalRevenue"
+            ? "rgba(255, 99, 132, 0.2)"
+            : typesOfRevenue === "revenueFromUs"
+            ? //green color
+              "rgba(75, 192, 192, 0.2)"
+            : "rgba(255, 206, 86, 0.2)"
+        }`,
       },
     ],
   };
