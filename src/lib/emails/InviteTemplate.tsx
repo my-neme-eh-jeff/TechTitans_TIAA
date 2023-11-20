@@ -1,6 +1,7 @@
 import {
   Body,
   Button,
+  Column,
   Container,
   Head,
   Hr,
@@ -11,7 +12,7 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import { Img } from '@react-email/img';
+import { Img } from "@react-email/img";
 import * as React from "react";
 
 interface AirbnbReviewEmailProps {
@@ -20,13 +21,8 @@ interface AirbnbReviewEmailProps {
   reviewText?: string;
 }
 
-const baseUrl = process.env["VERCEL_URL"]
-  ? `https://${process.env["VERCEL_URL"]}`
-  : "http://localhost:7799";
-
 export const InviteTemplateEmail = ({
   authorName = "John Doe",
-  authorImage = ``,
   reviewText = `“Please join my forum”`,
 }: AirbnbReviewEmailProps) => {
   const previewText = `Read ${authorName}'s review`;
@@ -40,22 +36,16 @@ export const InviteTemplateEmail = ({
         <Section style={main}>
           <Container style={container}>
             <Section>
-              <Img
-                src="apple-touch-icon.png"
-                width="180"
-                height="180"
-                alt="Retiral"
-              />
+              <Text style={logo}>Retiral</Text>
             </Section>
-            <Section>
-              <Img
-                src={authorImage}
-                width="96"
-                height="96"
-                alt={authorName}
-                style={userImage}
-              />
+            <Section style={sectionsBorders}>
+              <Row>
+                <Column style={sectionBorder} />
+                <Column style={sectionCenter} />
+                <Column style={sectionBorder} />
+              </Row>
             </Section>
+
             <Section style={{ paddingBottom: "20px" }}>
               <Row>
                 <Text style={heading}>Lets become retirement buddies!</Text>
@@ -123,6 +113,25 @@ const main = {
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
 };
 
+const logo = {
+  margin: "0 auto",
+};
+
+const sectionsBorders = {
+  width: "100%",
+  display: "flex",
+};
+
+const sectionBorder = {
+  borderBottom: "1px solid rgb(238,238,238)",
+  width: "249px",
+};
+
+const sectionCenter = {
+  borderBottom: "1px solid #006FEE",
+  width: "102px",
+};
+
 const container = {
   margin: "0 auto",
   padding: "20px 0 48px",
@@ -139,13 +148,13 @@ const heading = {
   fontSize: "32px",
   lineHeight: "1.3",
   fontWeight: "700",
-  color: "#484848",
+  color: "#006FEE",
 };
 
 const paragraph = {
   fontSize: "18px",
   lineHeight: "1.4",
-  color: "#484848",
+  color: "#000",
 };
 
 const review = {
@@ -156,7 +165,7 @@ const review = {
 };
 
 const button = {
-  backgroundColor: "#ff5a5f",
+  backgroundColor: "#17c964",
   borderRadius: "3px",
   color: "#fff",
   fontSize: "18px",
@@ -169,8 +178,9 @@ const button = {
 
 const link = {
   ...paragraph,
-  color: "#ff5a5f",
+  color: "#000",
   display: "block",
+  textDecoration: "underline",
 };
 
 const reportLink = {
