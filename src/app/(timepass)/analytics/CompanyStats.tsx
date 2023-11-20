@@ -15,7 +15,7 @@ export default function CompanyStats() {
         <h1 className="text-xl sm:text-2xl md:text-3xl">
           Heres how our AI models helped grow various companies
         </h1>
-        <div className="flex flex-col ">
+        <div className="flex flex-col min-w-[50%]">
           <ButtonGroup>
             {typesOfRevenue.map((type) => (
               <Button

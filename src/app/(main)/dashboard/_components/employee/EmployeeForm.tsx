@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { safeParse } from "valibot";
 
+export const dynamic = "force-dynamic";
+
 export default function EmployeeForm() {
   const initialData = {
     position: "",
@@ -46,7 +48,7 @@ export default function EmployeeForm() {
         setLoading(true);
         const resp = await axios.get("/api/get-company-data");
         setAutoCompleteData(resp.data.data);
-        console.log(resp.data.data);
+        // console.log(resp.data.data);
       } catch (err) {
         console.log(err);
       } finally {

@@ -6,11 +6,13 @@ import type { Session } from "next-auth";
 import EmployeeForm from "./EmployeeForm";
 import CompanyStats from "../../../../(timepass)/analytics/CompanyStats";
 
+
 export default async function EmployeeDashboard() {
   const session = (await getAuthSession()) as Session;
   const Currentemployee = (
     await db.select().from(employee).where(eq(employee.userId, session.user.id))
   )[0];
+  
 
   return Currentemployee?.status !== "approved" ? (
     <div className="w-full flex overflow-hidden">
