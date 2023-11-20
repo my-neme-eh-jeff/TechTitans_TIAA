@@ -15,18 +15,18 @@ const statusOptions = [
 ];
 
 const users = [
-  {
-    id: 7,
-    name: "Aman Nambisan",
-    position: "Head",
-    department: "HR",
-    time: "Just now",
-    phone_number: 9819281311,
-    avatar:
-      "https://lh3.googleusercontent.com/a/ACg8ocKf4OFSZ0LEnFJqY4rzJ7N2TUIPGjxNZY1PpQ5K9XdJ=s96-c",
-    email: "aman2003nambisan@gmail.com",
-    status: "pending",
-  },
+  // {
+  //   id: 7,
+  //   name: "Aman Nambisan",
+  //   position: "Head",
+  //   department: "HR",
+  //   time: "Just now",
+  //   phone_number: 9819281311,
+  //   avatar:
+  //     "https://lh3.googleusercontent.com/a/ACg8ocKf4OFSZ0LEnFJqY4rzJ7N2TUIPGjxNZY1PpQ5K9XdJ=s96-c",
+  //   email: "aman2003nambisan@gmail.com",
+  //   status: "pending",
+  // },
   {
     id: 11,
     name: "Divine Drapes",
