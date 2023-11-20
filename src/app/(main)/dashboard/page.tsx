@@ -31,7 +31,7 @@ import SiteAdminDashboard from "./_components/siteAdmin";
 export default async function Dashboard() {
   const session = (await getAuthSession()) as Session;
 
-  return session.user.role === "employee" || session.user.role === "user" ? (
+  return session.user.role === "employee" ? (
     <EmployeeDashboard />
   ) : session.user.role === "companyAdmin" ? (
     <div className="p-12 mt-4">
