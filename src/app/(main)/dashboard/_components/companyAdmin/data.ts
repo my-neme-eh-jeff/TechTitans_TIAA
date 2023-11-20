@@ -32,7 +32,7 @@ const users = [
     name: "Divine Drapes",
     position: "Employee",
     department: "IT",
-    time: "active",
+    time: "20 mins ago",
     phone_number: 9743213671,
     avatar:
       "https://lh3.googleusercontent.com/a/ACg8ocJDEVzhc5N20XGSk-Q3B3ZzKNmW_fIHOuJkZaSmEP5D=s96-c",
@@ -44,7 +44,7 @@ const users = [
     name: "HackoMordy",
     position: "Manager",
     department: "IT",
-    time: "active",
+    time: "21 mins ago",
     phone_number: 989746275,
     avatar:
       "https://lh3.googleusercontent.com/a/ACg8ocLSQ3SYc6gHTLcEJmp2SBBAzQ6Zvz1nDfzwUgUVK5Wd=s96-c",
@@ -56,7 +56,7 @@ const users = [
     name: "Jeff",
     position: "Head",
     department: "Sales",
-    time: "active",
+    time: "21 mins ago",
     phone_number: 7915467214,
     avatar:
       "https://lh3.googleusercontent.com/a/ACg8ocJLA0DoXG23CRD7dxPmKCqsra0Nalv7G17Yhoz9quzO=s96-c",
@@ -68,15 +68,25 @@ const users = [
     name: "Noah Diaz",
     position: "Employee",
     department: "Sales",
-    time: "active",
+    time: "23 mins ago",
     phone_number: 7854645137,
     avatar:
       "https://images.unsplash.com/photo-1628563694622-5a76957fd09c?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5zdGFncmFtJTIwcHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
     email: "noah@gmail.com",
     status: "pending",
   },
+  {
+    id: 17,
+    name: "Jacob sutaria",
+    position: "Employee",
+    department: "HR",
+    time: "32 mins ago",
+    phone_number: 887645137,
+    avatar:
+      "https://imgs.search.brave.com/bHpTjt49BE6IN6GPjmIm4FaNZXFj4xFH3ey8KXtPew0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/dzNzY2hvb2xzLmNv/bS9ob3d0by9pbWdf/YXZhdGFyLnBuZw",
+    email: "jacob@gmail.com",
+    status: "approved",
+  },
 ];
-
-
 
 export { columns, users, statusOptions };
