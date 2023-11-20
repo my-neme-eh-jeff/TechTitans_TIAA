@@ -58,6 +58,11 @@ export async function POST(req: NextRequest) {
       success: true,
     });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to send emails", sucess: false });
+    console.log(error);
+    return NextResponse.json({
+      error: "Failed to send emails",
+      sucess: false,
+      reason: error,
+    });
   }
 }

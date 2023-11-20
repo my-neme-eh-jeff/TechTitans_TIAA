@@ -82,21 +82,21 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
         const resp = await signIn("credentials", {
           email: data.email,
           password: data.password,
-          callbackUrl: "/dashboard",
+          redirect: false,
         });
+        console.log(resp);
         if (resp?.ok) {
           toast.success("Logged in successfully");
           router.push("/dashboard");
         } else {
-          toast.error(resp?.error || "Unexpected error");
           if (resp?.error === "User not found") {
-            //redirect with email in parameters
+            toast.error("User not found! Please signup first");
             router.push(`/sign-up?email=${data.email}`);
           }
         }
       }
     } catch (err) {
-      console.log(err);
+      router.push("/dashboard");
     } finally {
       setIsLoadingCredentials(false);
     }

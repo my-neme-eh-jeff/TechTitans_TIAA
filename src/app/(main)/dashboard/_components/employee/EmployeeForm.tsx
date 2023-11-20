@@ -64,7 +64,7 @@ export default function EmployeeForm() {
           required
           className="mx-auto"
           labelPlacement="outside"
-          isLoading={autoCompleteData.length === 0}
+          isLoading={loading}
           label="Compnay name"
           value={initialData.companyName}
           onSelectionChange={(e) => {

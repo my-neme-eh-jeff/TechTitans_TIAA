@@ -4,7 +4,7 @@ import { employee } from "@/lib/db/schema/roleBased/employees";
 import { eq } from "drizzle-orm";
 import type { Session } from "next-auth";
 import EmployeeForm from "./EmployeeForm";
-import CompanyStats from "../../../../(timepass)/analytics";
+import CompanyStats from "../../../../(timepass)/analytics/CompanyStats";
 
 export default async function EmployeeDashboard() {
   const session = (await getAuthSession()) as Session;

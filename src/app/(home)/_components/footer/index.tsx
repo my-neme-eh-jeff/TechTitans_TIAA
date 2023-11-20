@@ -37,6 +37,10 @@ export default function Footer() {
       icon: <Bot />,
       href: "/dashboard/chatbot",
     },
+    {
+      title:"",
+      
+    }
   ] as const;
 
   return (

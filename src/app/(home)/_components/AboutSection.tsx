@@ -81,6 +81,7 @@ function AboutSection() {
             >
               We use state of the art AI models to leverage this.
             </h2>
+            
           </div>
         </div>
 
