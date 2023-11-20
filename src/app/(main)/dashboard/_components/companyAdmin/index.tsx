@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -21,13 +21,14 @@ import {
   type SortDescriptor,
 } from "@nextui-org/react";
 import {
-  PlusIcon,
   MoreVertical as VerticalDotsIcon,
   ChevronDownIcon,
   SearchIcon,
 } from "lucide-react";
 import { columns, users, statusOptions } from "./data";
 import { capitalize } from "./utils";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -35,7 +36,14 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
+const INITIAL_VISIBLE_COLUMNS = [
+  "name",
+  "status",
+  "actions",
+  "department",
+  "time",
+  "phonenumber",
+];
 
 type User = (typeof users)[0];
 
@@ -52,6 +60,18 @@ export default function CompanyAdminDashboard() {
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
     column: "age",
     direction: "ascending",
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const resp = await axios.get("/api/companyAdmin/getAllUsers");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getData();
   });
 
   const [page, setPage] = React.useState(1);
@@ -84,9 +104,14 @@ export default function CompanyAdminDashboard() {
     }
 
     return filteredUsers;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
+
+  const handlingEmployeeAccept = () => {
+    toast.success("Employee Accepted");
+  };
 
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage;
@@ -119,15 +144,6 @@ export default function CompanyAdminDashboard() {
             {user.email}
           </User>
         );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">
-              {user.team}
-            </p>
-          </div>
-        );
       case "status":
         return (
           <Chip
@@ -149,9 +165,10 @@ export default function CompanyAdminDashboard() {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
+                <DropdownItem onClick={handlingEmployeeAccept}>
+                  Accept
+                </DropdownItem>
+                <DropdownItem>Reject</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -278,6 +295,7 @@ export default function CompanyAdminDashboard() {
         </div>
       </div>
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     filterValue,
     statusFilter,
@@ -325,6 +343,7 @@ export default function CompanyAdminDashboard() {
         </div>
       </div>
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
 
   return (

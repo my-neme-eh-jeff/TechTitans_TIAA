@@ -34,7 +34,9 @@ export default async function Dashboard() {
   return session.user.role === "employee" || session.user.role === "user" ? (
     <EmployeeDashboard />
   ) : session.user.role === "companyAdmin" ? (
-    <CompanyAdminDashboard />
+    <div className="p-12 mt-4">
+      <CompanyAdminDashboard />
+    </div>
   ) : (
     <SiteAdminDashboard />
   );
