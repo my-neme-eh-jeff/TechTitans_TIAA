@@ -20,7 +20,7 @@ const users = [
     name: "Aman Nambisan",
     position: "Head",
     department: "HR",
-    time: "active",
+    time: "Just now",
     phone_number: 9819281311,
     avatar:
       "https://lh3.googleusercontent.com/a/ACg8ocKf4OFSZ0LEnFJqY4rzJ7N2TUIPGjxNZY1PpQ5K9XdJ=s96-c",
