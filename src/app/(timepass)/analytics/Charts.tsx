@@ -60,11 +60,11 @@ export const BarChart = ({ typesOfRevenue }: BarChartPropType) => {
         ),
         backgroundColor: `${
           typesOfRevenue === "totalRevenue"
-            ? "rgba(255, 99, 132, 0.2)"
+            ? "rgba(255, 99, 132)"
             : typesOfRevenue === "revenueFromUs"
             ? //green color
-              "rgba(75, 192, 192, 0.2)"
-            : "rgba(255, 206, 86, 0.2)"
+              "rgba(75, 192, 192)"
+            : "rgba(255, 206, 86)"
         }`,
       },
     ],

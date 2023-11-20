@@ -34,9 +34,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     //TODO: add this after hosting
-    url: "",
+    url: siteConfig.url,
     title: siteConfig.name,
-    images: [`/og.webp`],
     description: siteConfig.description,
     siteName: siteConfig.name,
   },
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     creator: "@NambisanAman",
-    images: [`/og.webp`],
+    images: [`${siteConfig.url}/og.webp`],
     description: siteConfig.description,
   },
   keywords: [

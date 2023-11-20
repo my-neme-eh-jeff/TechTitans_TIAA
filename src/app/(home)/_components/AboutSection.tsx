@@ -61,7 +61,7 @@ function AboutSection() {
               Are you ever constantly
               <br />
               <div className="h-[100px] lg:h-[50px]">
-                <span className="w-[200px] text-transparent bg-gradient-to-b from-[#8b0000] to-[#3d0000] bg-clip-text">
+                <span className="w-[200px] text-transparent bg-gradient-to-b from-[#712424] to-[#ed0505] bg-clip-text">
                   <Typewriter
                     words={typeWriterSentaces}
                     loop={true}
@@ -81,7 +81,6 @@ function AboutSection() {
             >
               We use state of the art AI models to leverage this.
             </h2>
-            
           </div>
         </div>
 

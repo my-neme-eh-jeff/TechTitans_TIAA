@@ -109,12 +109,23 @@ export default function CompanyStats() {
 
   return (
     <div className="w-full flex flex-col">
-      <div className="flex flex-row">
-        <h1 className="text-xl sm:text-2xl md:text-3xl my-auto mr-16">
-          Heres how our AI models helped grow various companies
-        </h1>
+      <div className="flex lg:flex-row flex-col px-6 justify-center">
+        <div className="flex flex-col text-center my-auto min-w-[40%] ">
+          <h1 className="text-xl sm:text-2xl md:text-3xl mr-16">
+            Here&apos;s how our ML models help
+          </h1>
+          <h1 className="text-xl sm:text-2xl md:text-3xl  mr-16">
+            various companies{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-b selection:text-foreground from-[#6FEE8D] to-[#0e7139] ">
+              grow
+            </span>
+          </h1>
+          <p className="block text-lg sm:text-xl md:text-2xl my-auto mr-16 text-zinc-500">
+            Utilise our services to take your company to the next level
+          </p>
+        </div>
         <div className="flex flex-col min-w-[50%]">
-          <ButtonGroup>
+          <ButtonGroup size="md">
             {typesOfRevenueArray.map((type) => (
               <Button
                 key={type.value}
