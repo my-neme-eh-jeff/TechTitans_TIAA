@@ -51,5 +51,11 @@
     "resolveYourQueries": "अपने वित्तीय प्रश्नों का समाधान करें.",
     "buildProfile": "अपनी प्रारंभिक प्रोफ़ाइल बनाएं",
     "knowMore": "अधिक जानते हैं",
-    "connect": "वैयक्तिकृत संदेश से जुड़ें."
+    "connect": "वैयक्तिकृत संदेश से जुड़ें.",
+    "getPlans": "योजनाएं प्राप्त करें",
+    "stressTest": "तनाव की जांच",
+    "initialInvestment": "आरंभिक निवेश",
+    "annualContribution": "वार्षिक अंशदान",
+    "annualGrowth": "वार्षिक बढ़ोतरी %",
+    "fluctuation": "अस्थिरता %"
 }

@@ -1,6 +1,6 @@
 import 'package:tiaa/Screens/Chat/TextInput.dart';
 import 'package:tiaa/Screens/NavBar/Recommendations/Recommendations.dart';
-import 'package:tiaa/Screens/NavBar/RetirementCalculator.dart';
+import 'package:tiaa/Screens/NavBar/Home/RetirementCalculator.dart';
 import 'package:flutter/material.dart';
 import 'package:tiaa/Screens/Drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

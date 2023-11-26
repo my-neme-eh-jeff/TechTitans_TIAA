@@ -1,22 +1,20 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:tiaa/Models/RetirementAdviceModel.dart';
-import 'package:tiaa/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
+import '../../../Models/RetirementAdviceModel.dart';
+import '../../../constants.dart';
 
-class RetirementCalculator extends StatefulWidget {
-  const RetirementCalculator(
-      {Key? key, required this.name, required this.token})
-      : super(key: key);
-  final String name, token;
+class getPlans extends StatefulWidget {
+  const getPlans({Key? key, required this.name}) : super(key: key);
+  final String name;
 
   @override
-  State<RetirementCalculator> createState() => _RetirementCalculatorState();
+  State<getPlans> createState() => _getPlansState();
 }
 
-class _RetirementCalculatorState extends State<RetirementCalculator> {
+class _getPlansState extends State<getPlans> {
   final formKey = GlobalKey<FormState>();
   var selectedVal1 = "Cautious", selectedVal2 = "Like a king/queen";
   double deviceHeight = Constants().deviceHeight,
@@ -33,32 +31,11 @@ class _RetirementCalculatorState extends State<RetirementCalculator> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return SafeArea(
-        child: Form(
+    return Form(
       key: formKey,
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              width: width * (135 / 340),
-              height: height * (40 / 804),
-            ),
-            Text(
-              "${AppLocalizations.of(context)!.welcome}, ${widget.name}.",
-              style: TextStyle(
-                  fontFamily: "productSansReg",
-                  color: Colors.cyan[500],
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20),
-            ),
-            Text(
-              AppLocalizations.of(context)!.crosscheck,
-              style: TextStyle(
-                  fontFamily: "productSansReg",
-                  color: Colors.cyan[500],
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20),
-            ),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(
@@ -473,7 +450,7 @@ class _RetirementCalculatorState extends State<RetirementCalculator> {
           ],
         ),
       ),
-    ));
+    );
   }
 
   Future<List> retirementAdvice(

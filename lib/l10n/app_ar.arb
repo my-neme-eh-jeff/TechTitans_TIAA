@@ -51,5 +51,11 @@
     "resolveYourQueries": "حل استفساراتك المالية.",
     "buildProfile": "قم ببناء ملف التعريف الأولي الخاص بك",
     "knowMore": "تعرف أكثر",
-    "connect": "تواصل مع رسالة شخصية."
+    "connect": "تواصل مع رسالة شخصية.",
+    "getPlans": "الحصول على الخطط",
+    "stressTest": "اختبار الإجهاد",
+    "initialInvestment": "الاستثمار الأولي",
+    "annualContribution": "المساهمة السنوية",
+    "annualGrowth": "% النمو السنوي",
+    "fluctuation": "% التقلب"
 }

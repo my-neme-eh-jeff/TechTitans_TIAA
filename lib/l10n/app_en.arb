@@ -218,5 +218,29 @@
     "connect": "Connect with a personalised message.",
     "@connect": {
         "description": "For knowing more"
+    },
+    "getPlans": "Get Plans",
+    "@getPlans": {
+        "description": "For getting plans"
+    },
+    "stressTest": "Stress Test",
+    "@stressTest": {
+        "description": "For stress testing"
+    },
+    "initialInvestment": "Initial investment",
+    "@initialInvestment": {
+        "description": "For initial investment"
+    },
+    "annualContribution": "Annual Contribution",
+    "@annualContribution": {
+        "description": "For annual contribution"
+    },
+    "annualGrowth": "Annual Growth",
+    "@annualGrowth": {
+        "description": "For annual Growth"
+    },
+    "fluctuation": "Fluctuation",
+    "@Fluctuation": {
+        "description": "For fluctuation"
     }
 }
