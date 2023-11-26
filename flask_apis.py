@@ -16,6 +16,7 @@ import gc
 import re
 from sklearn.metrics import silhouette_score
 from flask_cors import CORS, cross_origin
+import numpy as np
 
 app = Flask(__name__)
 cors=CORS(app)
@@ -175,6 +176,13 @@ def conversational_chat():
     print("CHATTED -"*50)
     return jsonify({"user_id": chat_input.user_id, "chat_id": chat_input.chat_id, "response": result["answer"]})
 
+def remove_items(test_list, item): 
+# remove the item for all its occurrences 
+  c = test_list.count(item) 
+  for i in range(c): 
+      test_list.remove(item) 
+  return test_list 
+
 def perform_clustering(user_id):
     load_dotenv()
 
@@ -214,10 +222,46 @@ def perform_clustering(user_id):
     print(clusters)
     for num, cluster in clusters.items():
         if user_id in cluster:
+            cluster=remove_items(cluster, user_id)
+            cluster=set(cluster)
+            cluster=list(cluster)
             return cluster
 
     return None
 
+def monte_carlo_simulation(num, years, initial, annual, mean, std):
+  results = []
+
+  for i in range(num):
+      balance = initial
+
+      for j in range(years + 1):
+          returns = np.random.normal(mean, std, 5)
+          returns = [(val - min(returns)) / (max(returns) - min(returns)) * 0.1 for val in returns]
+          balance = balance * (1 + np.mean(returns)) + annual
+
+      results.append(balance)
+
+  return results
+
+
+
+@app.route('/monte_carlo', methods=['POST'])
+@cross_origin()
+def run_monte_carlo():
+  data = request.get_json()
+  num = int(data.get('num'))
+  years = int(data.get('years'))
+  initial = float(data.get('initial'))
+  annual = float(data.get('annual'))
+  mean = float(data.get('mean'))
+  std = float(data.get('std'))
+  results=[]
+  for i in range(years):
+    results.append(np.mean(monte_carlo_simulation(num, i, initial, annual, mean, std)))
+  return jsonify({"results": results})
+
+ 
 @app.route("/update-and-get-clusters", methods=['GET'])
 @cross_origin()
 def update_and_get_clusters():
