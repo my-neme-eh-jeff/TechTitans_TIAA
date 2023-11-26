@@ -61,7 +61,7 @@ function AboutSection() {
               Are you ever constantly
               <br />
               <div className="h-[100px] lg:h-[50px]">
-                <span className="w-[200px] text-transparent bg-gradient-to-b from-[#712424] to-[#ed0505] bg-clip-text">
+                <span className="w-[200px] lg:h-[50px] text-transparent bg-gradient-to-b from-[#712424] to-[#ed0505] bg-clip-text">
                   <Typewriter
                     words={typeWriterSentaces}
                     loop={true}

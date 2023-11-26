@@ -8,17 +8,19 @@ import {
 } from "drizzle-orm/pg-core";
 import { users } from "..";
 import { company } from "../../company";
-import { relations } from "drizzle-orm";
+import {
+  relations,
+  type InferSelectModel,
+  type InferInsertModel,
+} from "drizzle-orm";
 
-export const statusEnum = pgEnum("status", [
-  "approved",
-  "pending",
-]);
+export const statusEnum = pgEnum("status", ["approved", "pending"]);
 
 export const employee = pgTable("employee", {
   id: serial("id").notNull().primaryKey(),
   userId: text("user_id")
     .notNull()
+    .unique()
     .references(() => users.id, { onDelete: "cascade" }),
   companyId: integer("company_id")
     .notNull()
@@ -32,6 +34,8 @@ export const employee = pgTable("employee", {
     .defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
+export type SelectEmployee = InferSelectModel<typeof employee>;
+export type InsertEmployee = InferInsertModel<typeof employee>;
 
 export const employeeRelations = relations(employee, ({ one, many }) => ({
   employeeToCompany: one(company, {

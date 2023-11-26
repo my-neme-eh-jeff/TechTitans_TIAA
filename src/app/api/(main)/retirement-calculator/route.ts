@@ -39,22 +39,38 @@ export async function POST(req: NextRequest) {
       totalValuationOfCurrentAssets,
     });
     if (!isFormDataValid.success) {
+      console.log(isFormDataValid.issues);
       return NextResponse.json({
         success: false,
         error: "Invalid data",
       });
     }
-    const dbResponse = await db.insert(profile).values({
-      age,
-      goalRetirementAge,
-      safetyInRetirement,
-      salary,
-      typeOfRetirement,
-      userId: id,
-      workExperience,
-      numberOfDependantPeople,
-      totalValuationOfCurrentAssets,
-    });
+    const dbResponse = await db
+      .insert(profile)
+      .values({
+        age,
+        goalRetirementAge,
+        safetyInRetirement,
+        salary,
+        typeOfRetirement,
+        userId: id,
+        workExperience,
+        numberOfDependantPeople,
+        totalValuationOfCurrentAssets,
+      })
+      .onConflictDoUpdate({
+        target: profile.userId,
+        set: {
+          age,
+          goalRetirementAge,
+          safetyInRetirement,
+          salary,
+          typeOfRetirement,
+          workExperience,
+          numberOfDependantPeople,
+          totalValuationOfCurrentAssets,
+        },
+      });
     return NextResponse.json({
       success: true,
       message: `Profile Created`,

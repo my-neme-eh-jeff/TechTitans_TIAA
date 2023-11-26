@@ -30,10 +30,10 @@ export default function EmployeeForm() {
     const isFormDataValid = safeParse(InsertEmployeeSchema, {
       formData,
     });
-    // if (isFormDataValid.success) {
-    //   toast.error("Please fill all the fields");
-    //   return;
-    // }
+    if (isFormDataValid.success) {
+      toast.error("Please fill all the fields");
+      return;
+    }
     const resp = await axios.post("/api/employee-verification", formData);
     if (resp.data.success) {
       toast.success("Employee data saved successfully");
@@ -90,7 +90,7 @@ export default function EmployeeForm() {
         </Autocomplete>
       </div>
 
-      <div className="grid grid-cols-2 gap-5 mb-8">
+      <div className="mt-10 md:mt-0 grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
         <Input
           label="Department"
           value={formData.department}

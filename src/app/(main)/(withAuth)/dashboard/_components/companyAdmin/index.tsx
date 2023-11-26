@@ -19,6 +19,7 @@ import {
   type Selection,
   type ChipProps,
   type SortDescriptor,
+  Spinner,
 } from "@nextui-org/react";
 import {
   MoreVertical as VerticalDotsIcon,
@@ -29,6 +30,7 @@ import { columns, users, statusOptions } from "./data";
 import { capitalize } from "./utils";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { type SelectEmployee } from "@/lib/db/schema/roleBased/employees";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -62,17 +64,23 @@ export default function CompanyAdminDashboard() {
     direction: "ascending",
   });
   const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<SelectEmployee[]>();
 
   useEffect(() => {
     async function getData() {
       try {
-        const resp = await axios.get("/api/companyAdmin/getAllUsers");
+        setLoading(true);
+        const resp = await axios.get("/api/get-all-employees");
+        console.log(resp.data.data);
+        setData(resp.data.data);
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     }
     getData();
-  });
+  }, []);
 
   const [page, setPage] = React.useState(1);
 
@@ -375,7 +383,8 @@ export default function CompanyAdminDashboard() {
         )}
       </TableHeader>
       <TableBody
-        isLoading={true}
+        isLoading={loading}
+        loadingContent={<Spinner label="Loading..." />}
         emptyContent={"No users found"}
         items={sortedItems}
       >

@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   if (!id) {
     return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
-  if (user?.role !== "companyAdmin" || session?.user.role !== "companyAdmin") {
+  if (user?.role !== "companyAdmin" && session?.user.role !== "companyAdmin") {
     return NextResponse.json(
       {
         error: "You are not authorized to perform this action",

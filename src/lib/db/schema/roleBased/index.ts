@@ -66,6 +66,7 @@ export const profile = pgTable("profile", {
   id: serial("id").notNull().primaryKey(),
   userId: text("user_id")
     .notNull()
+    .unique()
     .references(() => users.id, { onDelete: "cascade" }),
   phone: text("phone"),
 

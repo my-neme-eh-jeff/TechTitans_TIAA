@@ -5,6 +5,9 @@ import { Spinner } from "@nextui-org/react";
 //sections
 import AboutSection from "./_components/AboutSection";
 import HeroSection from "./_components/HeroSection";
+import { getAuthSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
+
 const FAQSection = dynamic(() => import("./_components/FAQSection"), {
   loading: () => (
     <div className="flex justify-center align-middle ">
@@ -22,7 +25,11 @@ const PricingSection = dynamic(() => import("./_components/PricingSection"), {
   ssr: false,
 });
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await getAuthSession();
+  if (session) {
+    redirect("/dashboard");
+  }
 
   return (
     <>

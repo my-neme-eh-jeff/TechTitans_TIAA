@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    
     await db.insert(employee).values({
       userId: id,
       companyId,

@@ -29,13 +29,13 @@ export default function Footer() {
       title: "Retirement Calculator",
       description: "Calculate your retirement corpus",
       icon: <Calculator />,
-      href: "/dashboard/calculator",
+      href: "/retirement-calculator",
     },
     {
       title: "Financial advice chatbot",
       description: "Get financial advice from our chatbot",
       icon: <Bot />,
-      href: "/dashboard/chatbot",
+      href: "/chatbot",
     },
     {
       title:"Analysics",

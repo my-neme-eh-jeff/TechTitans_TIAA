@@ -32,32 +32,34 @@ export default async function Navbar() {
           </NextLink>
         </NavbarBrand>
 
-        {auth.user.role === "companyAdmin" &&
-          navbarLinksForDashboardAdmin.map((navbarLink, index) => (
-            <NavbarItem key={index}>
-              <Link
-                color="foreground"
-                key={navbarLink.title}
-                href={navbarLink.href}
-              >
-                {navbarLink.title}
-              </Link>
-            </NavbarItem>
-          ))}
-        {(auth.user.role === "employee" ||
-          auth.user.role === "siteAdmin" ||
-          auth.user.role === "user") &&
-          navbarLinksForDashboardEmployee.map((navbarLink, index) => (
-            <NavbarItem key={index}>
-              <Link
-                color="foreground"
-                key={navbarLink.title}
-                href={navbarLink.href}
-              >
-                {navbarLink.title}
-              </Link>
-            </NavbarItem>
-          ))}
+        <NavbarContent className="hidden md:flex">
+          {auth.user.role === "companyAdmin" &&
+            navbarLinksForDashboardAdmin.map((navbarLink, index) => (
+              <NavbarItem key={index}>
+                <Link
+                  color="foreground"
+                  key={navbarLink.title}
+                  href={navbarLink.href}
+                >
+                  {navbarLink.title}
+                </Link>
+              </NavbarItem>
+            ))}
+          {(auth.user.role === "employee" ||
+            auth.user.role === "siteAdmin" ||
+            auth.user.role === "user") &&
+            navbarLinksForDashboardEmployee.map((navbarLink, index) => (
+              <NavbarItem key={index}>
+                <Link
+                  color="foreground"
+                  key={navbarLink.title}
+                  href={navbarLink.href}
+                >
+                  {navbarLink.title}
+                </Link>
+              </NavbarItem>
+            ))}
+        </NavbarContent>
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">

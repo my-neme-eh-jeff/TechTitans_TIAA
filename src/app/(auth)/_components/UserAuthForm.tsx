@@ -92,11 +92,14 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
           if (resp?.error === "User not found") {
             toast.error("User not found! Please signup first");
             router.push(`/sign-up?email=${data.email}`);
+          } else {
+            toast.error("Invalid credentials");
           }
         }
       }
     } catch (err) {
-      router.push("/dashboard");
+      console.log(err);
+      toast.error("Error logging in");
     } finally {
       setIsLoadingCredentials(false);
     }

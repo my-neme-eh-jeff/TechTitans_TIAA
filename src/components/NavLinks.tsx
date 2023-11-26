@@ -45,15 +45,15 @@ export type NavbarLinksForAuthType = (typeof navLinksForAuth)[number]["title"];
 export const navbarLinksForDashboardAdmin = [
   {
     title: "Chatbot",
-    href: "/dashboard/chatbot",
+    href: "/chatbot",
   },
   {
     title: "Company",
-    href: "/dashboard/company",
+    href: "/company",
   },
   {
     title: "Retirement Calculator",
-    href: "/dashboard/retirement-calculator",
+    href: "/retirement-calculator",
   },
 ] as const;
 export type NavbarLinksForDashboardAdminType =
@@ -66,11 +66,11 @@ export const navbarLinksForDashboardEmployee = [
   },
   {
     title: "Chatbot",
-    href: "/dashboard/chatbot",
+    href: "/chatbot",
   },
   {
     title: "Retirement Calculator",
-    href: "/dashboard/retirement-calculator",
+    href: "/retirement-calculator",
   },
 ] as const;
 export type NavbarLinksForDashboardEmployeeType =
