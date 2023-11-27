@@ -235,11 +235,11 @@
     "@annualContribution": {
         "description": "For annual contribution"
     },
-    "annualGrowth": "Annual Growth",
+    "annualGrowth": "Annual Growth %",
     "@annualGrowth": {
         "description": "For annual Growth"
     },
-    "fluctuation": "Fluctuation",
+    "fluctuation": "Fluctuation %",
     "@Fluctuation": {
         "description": "For fluctuation"
     }
