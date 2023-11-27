@@ -41,6 +41,9 @@ For the latter, we have created a website aimed at attracting clients from other
   <img src = "http://i.imgur.com/HowF6aM.png" width=350>
 </p>
 
+![image](https://github.com/my-neme-eh-jeff/TechTitans_TIAA/assets/113699487/e85597ab-30be-4ebd-9197-182543d89f36)
+
+
 ## Features
 
 A few of the things you can do with GitPoint:
