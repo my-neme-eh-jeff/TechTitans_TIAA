@@ -27,7 +27,6 @@ export default function EmployeeForm() {
   const [loading, setLoading] = useState(true);
 
   const handlingEmployeeFormSubmission = async () => {
-    toast.success("Employee data saved successfully");
     const isFormDataValid = safeParse(InsertEmployeeSchema, {
       formData,
     });
@@ -35,15 +34,19 @@ export default function EmployeeForm() {
       toast.error("Please fill all the fields");
       return;
     }
-    try{
+    const loadingToast = toast.loading("Saving employee data");
+    try {
+      setEmployeeFormLoading(true);
       const resp = await axios.post("/api/employee-verification", formData);
-    }catch(err){
-      console.log(err)
-    }
-    if (resp.data.success) {
-      toast.success("Employee data saved successfully");
-    } else {
+      if (resp.data.success) {
+        toast.success("Employee data saved successfully");
+      }
+    } catch (err) {
       toast.error("Employee data not saved");
+      console.log(err);
+    } finally {
+      setEmployeeFormLoading(false);
+      toast.dismiss(loadingToast);
     }
   };
 
