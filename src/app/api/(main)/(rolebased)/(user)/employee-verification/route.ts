@@ -37,14 +37,25 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    
-    await db.insert(employee).values({
-      userId: id,
-      companyId,
-      department,
-      phoneNumber,
-      position,
-    });
+    await db
+      .insert(employee)
+      .values({
+        userId: id,
+        companyId,
+        department,
+        phoneNumber,
+        position,
+      })
+      .onConflictDoUpdate({
+        target: [employee.userId],
+        set: {
+          userId: id,
+          companyId,
+          department,
+          phoneNumber,
+          position,
+        },
+      });
     return NextResponse.json({
       message: "Employee added to verification list",
       success: true,
