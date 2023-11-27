@@ -34,9 +34,7 @@ To do the former, we have created a user-friendly, intuitive, cross-platform Flu
 
 For the latter, we have created a Next.js website aimed at attracting clients from other businesses and companies. We will license our ML models and APIs to interested companies at appropriate costs, so that they can use our ML models and APIs for their own suitable purposes. It has in it a beautiful landing page, amazing graphs to highlight how using our services have helped other businesses in the past. Interested companies can have their employees registered on this website. After being approved by the administrator of the website, they get access to our API keys and services for the designated time period.
 
-To deplo our ML models, we have leveraged the capabilities of Flask and deployed on Replit. For backend, we have used Supabase, an advanced SQL database affording us appropriate security and ease of use.
-
-**The app is available for both iOS and Android.**
+To deploy our ML models, we have leveraged the capabilities of Flask and deployed on Replit. For backend, we have used Supabase, an advanced SQL database affording us appropriate security, ease of use and scalability.
 <hr />
 
 ## Features
@@ -64,6 +62,9 @@ Retiral consists of:
 <hr/>
 
 ### App
+
+**The app is available for both iOS and Android.**
+
 <p float="left">
   <img src="https://i.imgur.com/ZuahH5T.jpg" width="400" padding="2"/>
   <img src="https://i.imgur.com/RaRlWAn.jpg" width="400" padding="2"/>
