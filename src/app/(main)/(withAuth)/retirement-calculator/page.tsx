@@ -48,14 +48,14 @@ export default function ReitrementCalculator() {
   ] = useState("false");
   const [apiResponse, setApiResponse] = useState({
     investment: "",
-    return: "",
+    returns: "",
     time: "",
     plan: "",
   });
   useEffect(() => {
     setApiResponse({
       investment: localStorage.getItem("investment") || "",
-      return: localStorage.getItem("return") || "",
+      returns: localStorage.getItem("returns") || "",
       time: localStorage.getItem("time") || "",
       plan: localStorage.getItem("plan") || "",
     });
@@ -72,7 +72,7 @@ export default function ReitrementCalculator() {
     if (
       apiResponse.investment &&
       apiResponse.plan &&
-      apiResponse.return &&
+      apiResponse.returns &&
       apiResponse.time
     ) {
       return true;
@@ -86,6 +86,16 @@ export default function ReitrementCalculator() {
   };
   const resetForm = () => {
     setFormData(initialData);
+  };
+  const dealingWithPlanDownload = () => {
+    const data = new Blob([apiResponse.plan], {
+      type: "text/plain",
+    });
+    const csvURL = window.URL.createObjectURL(data);
+    const tempLink = document.createElement("a");
+    tempLink.href = csvURL;
+    tempLink.setAttribute("download", "retirement-plan.txt");
+    tempLink.click();
   };
   const handlingCalculatorFormSubmission = async (
     saveDataOrNot: boolean = false
@@ -140,11 +150,11 @@ export default function ReitrementCalculator() {
           if (MLResponse.status === 200) {
             setApiResponse(MLResponse.data);
             toast.success("Ideal retirement plan calculated");
-            localStorage.setItem("investment", apiResponse.investment);
-            localStorage.setItem("return", apiResponse.return);
-            localStorage.setItem("time", apiResponse.time);
-            localStorage.setItem("plan", apiResponse.plan);
-            sessionStorage.setItem("", "true");
+            localStorage.setItem("investment", MLResponse.data.investment);
+            localStorage.setItem("returns", MLResponse.data.returns);
+            localStorage.setItem("time", MLResponse.data.time);
+            localStorage.setItem("plan", MLResponse.data.plan);
+            sessionStorage.setItem("retirementCalculatorHit", "true");
             onOpen();
           }
         })
@@ -164,10 +174,11 @@ export default function ReitrementCalculator() {
           const MLResponse = await MLPromise;
           setApiResponse(MLResponse.data);
           toast.success("Ideal retirement plan calculated");
-          localStorage.setItem("investment", apiResponse.investment);
-          localStorage.setItem("return", apiResponse.return);
-          localStorage.setItem("time", apiResponse.time);
-          localStorage.setItem("plan", apiResponse.plan);
+          localStorage.setItem("investment", MLResponse.data.investment);
+          localStorage.setItem("returns", MLResponse.data.returns);
+          localStorage.setItem("time", MLResponse.data.time);
+          localStorage.setItem("plan", MLResponse.data.plan);
+          sessionStorage.setItem("retirementCalculatorHit", "true");
           onOpen();
         } catch (err) {
           toast.error("Unexpected error calculating plan");
@@ -232,7 +243,7 @@ export default function ReitrementCalculator() {
                 required
                 endContent={<IndianRupee />}
                 type="number"
-                label="Salary"
+                label="Salary in lpa"
                 value={formData.salary}
                 onChange={(e) => handleChange("salary", e.target.value)}
               />
@@ -331,6 +342,7 @@ export default function ReitrementCalculator() {
         </section>
       </div>
       <Modal
+        size="lg"
         placement="center"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -358,28 +370,30 @@ export default function ReitrementCalculator() {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex gap-1 mt-4 text-2xl md:text-3xl lg:text-4xl leading-7 font-mono">
+              <ModalHeader className="flex gap-1 mt-4 text-2xl md:text-3xl lg:text-4xl leading-7 font-mono from-[#FFD700] to-[#FFB457] bg-clip-text text-transparent bg-gradient-to-b selection:text-foreground">
                 Your epic retirement plan is now one step closer!
               </ModalHeader>
               <ModalBody>
                 <h1 className="text-1xl md:text-2xl lg:text-3xl leading-7">
-                  {"Investment needed" + apiResponse.investment + "₹"}
+                  {"Investment needed: ₹" + apiResponse.investment}
                 </h1>
                 <h1 className="text-1xl md:text-2xl lg:text-3xl leading-7">
-                  {"Return expected" + apiResponse.return + "₹"}
+                  {"Return expected: ₹" + apiResponse.returns}
                 </h1>
                 <h2 className="text-1xl md:text-2xl lg:text-3xl leading-7">
-                  {"Years:" + apiResponse.time}
+                  {"Years: " + apiResponse.time}
                 </h2>
-                <h3 className="text-lg md:text-xl lg:text-2xl leading-7">
-                  {"Detailed Plan:" + apiResponse.plan}
+                <h3 className="text-md md:text-lg lg:text-xl leading-7 text-center">
+                  {"Detailed Plan: "}
+                  <br />
+                  {apiResponse.plan}
                 </h3>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="success" onPress={onClose}>
+                <Button color="success" onPress={dealingWithPlanDownload}>
                   Download <Download />
                 </Button>
               </ModalFooter>

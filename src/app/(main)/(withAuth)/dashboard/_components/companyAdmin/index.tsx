@@ -73,6 +73,7 @@ export default function CompanyAdminDashboard() {
         const resp = await axios.get("/api/get-all-employees");
         console.log(resp.data.data);
         setData(resp.data.data);
+        console.log(data);
       } catch (err) {
         console.log(err);
       } finally {
@@ -80,6 +81,7 @@ export default function CompanyAdminDashboard() {
       }
     }
     getData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [page, setPage] = React.useState(1);
@@ -117,8 +119,23 @@ export default function CompanyAdminDashboard() {
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
-  const handlingEmployeeAccept = () => {
-    toast.success("Employee Accepted");
+  const handlingEmployeeAcceptAndReject = async (
+    user: User,
+    accept: "accept" | "reject"
+  ) => {
+    const loadingToast = toast.loading(`${accept}ing employee`);
+    try {
+      await axios.post("/api/employee-confirmation", {
+        EmployeeId: user.id,
+        accept: accept === "accept" ? true : false,
+      });
+      toast.success("Employee Accepted");
+    } catch (err) {
+      console.log(err);
+      toast.error("Something went wrong");
+    } finally {
+      toast.dismiss(loadingToast);
+    }
   };
 
   const items = React.useMemo(() => {
@@ -165,18 +182,35 @@ export default function CompanyAdminDashboard() {
         );
       case "actions":
         return (
-          <div className="relative flex justify-end items-center gap-2">
+          <div className="relative flex justify-center items-center gap-2">
             <Dropdown>
               <DropdownTrigger>
-                <Button isIconOnly size="sm" variant="light">
+                <Button
+                  isIconOnly
+                  size="sm"
+                  variant="light"
+                  aria-label="Open options menu"
+                >
                   <VerticalDotsIcon className="text-default-300" />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem onClick={handlingEmployeeAccept}>
+                <DropdownItem
+                  aria-label="Accept Employee"
+                  onClick={() =>
+                    handlingEmployeeAcceptAndReject(user, "accept")
+                  }
+                >
                   Accept
                 </DropdownItem>
-                <DropdownItem>Reject</DropdownItem>
+                <DropdownItem
+                  aria-label="Reject Employee"
+                  onClick={() =>
+                    handlingEmployeeAcceptAndReject(user, "reject")
+                  }
+                >
+                  Reject
+                </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -356,7 +390,7 @@ export default function CompanyAdminDashboard() {
 
   return (
     <Table
-      aria-label="Example table with custom cells, pagination and sorting"
+      aria-label="List of all the employees"
       isHeaderSticky
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
@@ -385,7 +419,7 @@ export default function CompanyAdminDashboard() {
       <TableBody
         isLoading={loading}
         loadingContent={<Spinner label="Loading..." />}
-        emptyContent={"No users found"}
+        emptyContent={"No employee found"}
         items={sortedItems}
       >
         {(item) => (

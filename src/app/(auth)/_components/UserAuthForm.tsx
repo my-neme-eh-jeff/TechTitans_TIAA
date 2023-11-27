@@ -84,7 +84,6 @@ export default function UserAuthForm({ isSignup }: UserAuthFormProps) {
           password: data.password,
           redirect: false,
         });
-        console.log(resp);
         if (resp?.ok) {
           toast.success("Logged in successfully");
           router.push("/dashboard");

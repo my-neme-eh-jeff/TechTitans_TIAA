@@ -16,7 +16,7 @@ const statusOptions = [
 
 const users = [
   {
-    id: 7,
+    id: 18,
     name: "Aman Nambisan",
     position: "Head",
     department: "HR",
@@ -77,14 +77,14 @@ const users = [
   },
   {
     id: 17,
-    name: "Jacob sutaria",
-    position: "Employee",
-    department: "HR",
+    name: "Rajhan Shah",
+    position: "Executive",
+    department: "Production",
     time: "32 mins ago",
     phoneNumber: 887645137,
     avatar:
       "https://imgs.search.brave.com/bHpTjt49BE6IN6GPjmIm4FaNZXFj4xFH3ey8KXtPew0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/dzNzY2hvb2xzLmNv/bS9ob3d0by9pbWdf/YXZhdGFyLnBuZw",
-    email: "jacob@gmail.com",
+    email: "RajhanShah@yahoo.com",
     status: "approved",
   },
 ];

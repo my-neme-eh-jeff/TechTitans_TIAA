@@ -22,6 +22,7 @@ import {
 
 export default async function Navbar() {
   const auth = (await getAuthSession()) as Session;
+  
   return (
     <NextUINavbar maxWidth="full" position="sticky" aria-selected isBordered>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">

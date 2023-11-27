@@ -28,8 +28,9 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { EmployeeId, accept } = body;
+    console.log(EmployeeId)
     const employeeConfirmationSchema = object({
-      id: number(),
+      EmployeeId: number(),
       accept: boolean(),
     });
     const isValidData = safeParse(employeeConfirmationSchema, body);
