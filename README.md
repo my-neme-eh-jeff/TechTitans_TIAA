@@ -24,6 +24,7 @@
 - [Screenshots](#screenshots)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<hr />
 
 ## Introduction
 
@@ -36,6 +37,7 @@ For the latter, we have created a Next.js website aimed at attracting clients fr
 To deplo our ML models, we have leveraged the capabilities of Flask and deployed on Replit. For backend, we have used Supabase, an advanced SQL database affording us appropriate security and ease of use.
 
 **The app is available for both iOS and Android.**
+<hr />
 
 ## Features
 
@@ -47,6 +49,7 @@ Retiral consists of:
 * Affinity propagation clustering of users with similar retirement goals, enabling community interaction.
 * Use client feedback with FAISS vector store to assess whether they have the satisfactory retirement scheme as per their needs.
 * Multilingual support, fingerprint authentication in app and CSRF protection in web. Both feature beautiful graphs for impressive data analytics.
+<hr />
   
  ## Screenshots
  ### Web
@@ -57,10 +60,10 @@ Retiral consists of:
 ![image](https://github.com/my-neme-eh-jeff/TechTitans_TIAA/assets/113699487/2a6d03bc-5e8a-46cd-bb80-153112421ac0)
 
 ![image](https://github.com/my-neme-eh-jeff/TechTitans_TIAA/assets/113699487/6df69067-1abd-44bd-b9db-a09c413f1ec4)
-
- ### App
 </p>
 <hr/>
+
+### App
 <p float="left">
   <img src="https://i.imgur.com/ZuahH5T.jpg" width="400" padding="2"/>
   <img src="https://i.imgur.com/RaRlWAn.jpg" width="400" padding="2"/>
