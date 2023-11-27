@@ -84,3 +84,6 @@ Retiral consists of:
   <img src="https://i.imgur.com/P1b78Qc.jpg" width="400" padding="2"/>
   <img src="https://i.imgur.com/PvRj0bY.jpg" width="400" padding="2"/>
 </p>
+<p float="left">
+  <img src="https://i.imgur.com/wELeYIx.jpg" width="400" padding="2"/>
+</p>
