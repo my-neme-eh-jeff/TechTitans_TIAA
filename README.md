@@ -60,22 +60,22 @@ Retiral consists of:
 </p>
 <hr/>
 <p float="left">
-  <img src="https://i.imgur.com/ZuahH5T.jpg" width="500" padding="2"/>
-  <img src="https://i.imgur.com/RaRlWAn.jpg" width="500" padding="2"/>
+  <img src="https://i.imgur.com/ZuahH5T.jpg" width="400" padding="2"/>
+  <img src="https://i.imgur.com/RaRlWAn.jpg" width="400" padding="2"/>
 </p>
 <p float="left">
-  <img src="https://i.imgur.com/lZGWlG0.jpg" width="500" padding="2"/>
-  <img src="https://i.imgur.com/aftrxCi.jpg" width="500" padding="2"/>
+  <img src="https://i.imgur.com/lZGWlG0.jpg" width="400" padding="2"/>
+  <img src="https://i.imgur.com/aftrxCi.jpg" width="400" padding="2"/>
 </p>
 <p float="left">
-  <img src="https://i.imgur.com/xYP6PJG.jpg" width="500" padding="2"/>
-  <img src="https://i.imgur.com/PjhJL2O.jpg" width="500" padding="2"/>
+  <img src="https://i.imgur.com/xYP6PJG.jpg" width="400" padding="2"/>
+  <img src="https://i.imgur.com/PjhJL2O.jpg" width="400" padding="2"/>
 </p>
 <p float="left">
-  <img src="https://i.imgur.com/JHvfB5K.jpg" width="500" padding="2"/>
-  <img src="https://i.imgur.com/6af6oxP.jpg" width="500" padding="2"/>
+  <img src="https://i.imgur.com/JHvfB5K.jpg" width="400" padding="2"/>
+  <img src="https://i.imgur.com/6af6oxP.jpg" width="400" padding="2"/>
 </p>
 <p float="left">
-  <img src="https://i.imgur.com/P1b78Qc.jpg" width="500" padding="2"/>
-  <img src="https://i.imgur.com/PvRj0bY.jpg" width="500" padding="2"/>
+  <img src="https://i.imgur.com/P1b78Qc.jpg" width="400" padding="2"/>
+  <img src="https://i.imgur.com/PvRj0bY.jpg" width="400" padding="2"/>
 </p>
