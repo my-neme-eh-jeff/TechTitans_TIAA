@@ -29,16 +29,13 @@
 
 ## Introduction
 
-[![Build Status](https://img.shields.io/travis/gitpoint/git-point.svg?style=flat-square)](https://travis-ci.org/gitpoint/git-point)
-[![Coveralls](https://img.shields.io/coveralls/github/gitpoint/git-point.svg?style=flat-square)](https://coveralls.io/github/gitpoint/git-point)
-[![All Contributors](https://img.shields.io/badge/all_contributors-73-orange.svg?style=flat-square)](./CONTRIBUTORS.md)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
-[![Gitter chat](https://img.shields.io/badge/chat-on_gitter-008080.svg?style=flat-square)](https://gitter.im/git-point)
+Retiral is a multi-pronged financial venture, aimed at providing ethical business solutions to our customers while simultaneously maintaining healthy profits. 
 
-View repository and user information, control your notifications and even manage your issues and pull requests. Built with React Native, GitPoint is one of the most feature-rich unofficial GitHub clients that is 100% free.
+To do the former, we have created a user-friendly, intuitive app that will allow users to access various AI based retirement solutions such as a retirement calculator, a mechanism to stress test one's retirement plans, an online forum for meeting like-minded people, and a chatbot for financial advice. It also features other salient features of multilingual support in English, Hindi and Arabic to make the app truly inclusive of our country's diversity, a dark mode, and beautiful animations and 3-D models to make the app pretty to look at as an aside.
 
-**Available for both iOS and Android.**
+For the latter, we have created a website aimed at attracting clients from other businesses and companies. We will license our ML models and APIs to interested companies at appropriate costs, so that they can use our ML models and APIs for their own suitable purposes. It has in it a beautiful landing page, amazing graphs to highlight how using our services have helped other businesses in the past. Interested companies can have their employees registered on this website. After being approved by the administrator of the website, they get access to our API keys and services for the designated time period.
+
+**The app is available for both iOS and Android.**
 
 <p align="center">
   <img src = "http://i.imgur.com/HowF6aM.png" width=350>
