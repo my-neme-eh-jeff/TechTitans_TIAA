@@ -38,7 +38,7 @@ For the latter, we have created a website aimed at attracting clients from other
 
 ## Features
 
-A few of the things you can do with Retiral:
+Retiral consists of:
 
 * A GPT-Turbo based AskYourCSV tool to analyze a user's financial situation and recommend retirement savings goals.
 * A Haystack powered chatbot based on retrieval - generative augmentation offering personalized financial advice 24/7.
