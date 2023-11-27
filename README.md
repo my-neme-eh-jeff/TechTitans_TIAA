@@ -49,9 +49,33 @@ Retiral consists of:
 * Multilingual support, fingerprint authentication in app and CSRF protection in web. Both feature beautiful graphs for impressive data analytics.
   
  ## Screenshots
-
+ ### Web
+<p>
+  
 ![image](https://github.com/my-neme-eh-jeff/TechTitans_TIAA/assets/113699487/e85597ab-30be-4ebd-9197-182543d89f36)
 
 ![image](https://github.com/my-neme-eh-jeff/TechTitans_TIAA/assets/113699487/2a6d03bc-5e8a-46cd-bb80-153112421ac0)
 
 ![image](https://github.com/my-neme-eh-jeff/TechTitans_TIAA/assets/113699487/6df69067-1abd-44bd-b9db-a09c413f1ec4)
+</p>
+<hr/>
+<p float="left">
+  <img src="https://i.imgur.com/ZuahH5T.jpg" width="500" padding="2"/>
+  <img src="https://i.imgur.com/RaRlWAn.jpg" width="500" padding="2"/>
+</p>
+<p float="left">
+  <img src="https://i.imgur.com/lZGWlG0.jpg" width="500" padding="2"/>
+  <img src="https://i.imgur.com/aftrxCi.jpg" width="500" padding="2"/>
+</p>
+<p float="left">
+  <img src="https://i.imgur.com/xYP6PJG.jpg" width="500" padding="2"/>
+  <img src="https://i.imgur.com/PjhJL2O.jpg" width="500" padding="2"/>
+</p>
+<p float="left">
+  <img src="https://i.imgur.com/JHvfB5K.jpg" width="500" padding="2"/>
+  <img src="https://i.imgur.com/6af6oxP.jpg" width="500" padding="2"/>
+</p>
+<p float="left">
+  <img src="https://i.imgur.com/P1b78Qc.jpg" width="500" padding="2"/>
+  <img src="https://i.imgur.com/PvRj0bY.jpg" width="500" padding="2"/>
+</p>
