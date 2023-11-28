@@ -116,7 +116,7 @@ export const authOptions: NextAuthOptions = {
       };
     },
     redirect() {
-      return "http://localhost:7779/dashboard";
+      return "https://retiral.vercel.app/dashboard";
     },
   },
 };
