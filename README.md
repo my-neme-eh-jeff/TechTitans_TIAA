@@ -1,7 +1,7 @@
 <h1 align="center"> RETIRAL </h1> <br>
 <p align="center">
   <a href="https://retiral.vercel.app/">
-    <img alt="GitPoint" title="Retiral" src="https://i.imgur.com/YLNuQZr.png" width="50">
+    <img alt="Retiral logo" title="Retiral" src="https://imgur.com/bjh6zOY" width="50">
   </a>
 </p>
 
