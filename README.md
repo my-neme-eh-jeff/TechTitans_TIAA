@@ -1,7 +1,7 @@
 <h1 align="center"> RETIRAL </h1> <br>
 <p align="center">
   <a href="https://retiral.vercel.app/">
-    <img alt="Retiral logo" title="Retiral" src="https://imgur.com/bjh6zOY" width="50">
+    <img alt="Retiral logo" title="Retiral" src="https://res.cloudinary.com/dh4afwpjh/image/upload/v1712862256/iflv7iqmp50sqp3scec8.png" width="50">
   </a>
 </p>
 
