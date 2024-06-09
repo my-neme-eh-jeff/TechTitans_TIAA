@@ -5,7 +5,7 @@
   </a>
 </p>
 
-<p align="center" style="font-size: 24px;">
+<p align="center" style="font-size: 48px;">
   <b>Unlocking a Golden Retirement Age.</b>
 </p>
 
