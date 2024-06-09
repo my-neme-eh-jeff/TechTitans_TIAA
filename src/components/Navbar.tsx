@@ -22,7 +22,7 @@ import {
 
 export default async function Navbar() {
   const auth = (await getAuthSession()) as Session;
-  
+
   return (
     <NextUINavbar maxWidth="full" position="sticky" aria-selected isBordered>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -96,15 +96,14 @@ export default async function Navbar() {
               </Link>
             </NavbarMenuItem>
           ))}
-        {auth.user.role === "employee" ||
-          (auth.user.role === "siteAdmin" &&
-            navbarLinksForDashboardEmployee.map((navbarLink, index) => (
-              <NavbarMenuItem key={`${index}`}>
-                <Link href={navbarLink.href} size="lg">
-                  {navbarLink.title}
-                </Link>
-              </NavbarMenuItem>
-            )))}
+        {(auth.user.role === "employee" || auth.user.role === "siteAdmin") &&
+          navbarLinksForDashboardEmployee.map((navbarLink, index) => (
+            <NavbarMenuItem key={`${index}`}>
+              <Link href={navbarLink.href} size="lg">
+                {navbarLink.title}
+              </Link>
+            </NavbarMenuItem>
+          ))}
       </NavbarMenu>
     </NextUINavbar>
   );
