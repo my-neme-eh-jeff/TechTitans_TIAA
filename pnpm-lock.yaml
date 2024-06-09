@@ -65,6 +65,9 @@ dependencies:
   '@nextui-org/theme':
     specifier: ^2.1.9
     version: 2.1.17(tailwindcss@3.3.5)
+  '@react-aria/ssr':
+    specifier: ^3.9.1
+    version: 3.9.1(react@18.2.0)
   '@react-aria/utils':
     specifier: ^3.20.0
     version: 3.22.0(react@18.2.0)
@@ -107,6 +110,9 @@ dependencies:
   cmdk:
     specifier: ^0.2.0
     version: 0.2.0(@types/react@18.2.37)(react-dom@18.2.0)(react@18.2.0)
+  color2k:
+    specifier: ^2.0.3
+    version: 2.0.3
   dayjs:
     specifier: ^1.11.9
     version: 1.11.10
@@ -2247,7 +2253,7 @@ packages:
       tailwindcss: '*'
     dependencies:
       color: 4.2.3
-      color2k: 2.0.2
+      color2k: 2.0.3
       deepmerge: 4.3.1
       flat: 5.0.2
       lodash.foreach: 4.5.0
@@ -2376,7 +2382,7 @@ packages:
       react: '>=18'
     dependencies:
       '@react-aria/interactions': 3.20.0(react@18.2.0)
-      '@react-aria/ssr': 3.9.0(react@18.2.0)
+      '@react-aria/ssr': 3.9.1(react@18.2.0)
       '@react-aria/utils': 3.22.0(react@18.2.0)
       '@react-types/shared': 3.22.0(react@18.2.0)
       react: 18.2.0
@@ -2446,7 +2452,7 @@ packages:
     peerDependencies:
       react: '>=18'
     dependencies:
-      '@react-aria/ssr': 3.9.0(react@18.2.0)
+      '@react-aria/ssr': 3.9.1(react@18.2.0)
       react: 18.2.0
     dev: false
 
@@ -2908,7 +2914,7 @@ packages:
       '@internationalized/message': 3.1.1
       '@internationalized/number': 3.4.0
       '@internationalized/string': 3.1.1
-      '@react-aria/ssr': 3.9.0(react@18.2.0)
+      '@react-aria/ssr': 3.9.1(react@18.2.0)
       '@react-aria/utils': 3.22.0(react@18.2.0)
       '@react-types/shared': 3.22.0(react@18.2.0)
       '@swc/helpers': 0.5.2
@@ -2920,7 +2926,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
-      '@react-aria/ssr': 3.9.0(react@18.2.0)
+      '@react-aria/ssr': 3.9.1(react@18.2.0)
       '@react-aria/utils': 3.22.0(react@18.2.0)
       '@react-types/shared': 3.22.0(react@18.2.0)
       '@swc/helpers': 0.5.2
@@ -3009,7 +3015,7 @@ packages:
       '@react-aria/focus': 3.15.0(react@18.2.0)
       '@react-aria/i18n': 3.9.0(react@18.2.0)
       '@react-aria/interactions': 3.20.0(react@18.2.0)
-      '@react-aria/ssr': 3.9.0(react@18.2.0)
+      '@react-aria/ssr': 3.9.1(react@18.2.0)
       '@react-aria/utils': 3.22.0(react@18.2.0)
       '@react-aria/visually-hidden': 3.8.7(react@18.2.0)
       '@react-stately/overlays': 3.6.4(react@18.2.0)
@@ -3087,8 +3093,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@react-aria/ssr@3.9.0(react@18.2.0):
-    resolution: {integrity: sha512-Bz6BqP6ZorCme9tSWHZVmmY+s7AU8l6Vl2NUYmBzezD//fVHHfFo4lFBn5tBuAaJEm3AuCLaJQ6H2qhxNSb7zg==}
+  /@react-aria/ssr@3.9.1(react@18.2.0):
+    resolution: {integrity: sha512-NqzkLFP8ZVI4GSorS0AYljC13QW2sc8bDqJOkBvkAt3M8gbcAXJWVRGtZBCRscki9RZF+rNlnPdg0G0jYkhJcg==}
     engines: {node: '>= 12'}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
@@ -3204,7 +3210,7 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
-      '@react-aria/ssr': 3.9.0(react@18.2.0)
+      '@react-aria/ssr': 3.9.1(react@18.2.0)
       '@react-stately/utils': 3.9.0(react@18.2.0)
       '@react-types/shared': 3.22.0(react@18.2.0)
       '@swc/helpers': 0.5.2
@@ -4702,8 +4708,8 @@ packages:
     hasBin: true
     dev: false
 
-  /color2k@2.0.2:
-    resolution: {integrity: sha512-kJhwH5nAwb34tmyuqq/lgjEKzlFXn1U99NlnB6Ws4qVaERcRUYeYP1cBw6BJ4vxaWStAUEef4WMr7WjOCnBt8w==}
+  /color2k@2.0.3:
+    resolution: {integrity: sha512-zW190nQTIoXcGCaU08DvVNFTmQhUpnJfVuAKfWqUQkflXKpaDdpaYoM0iluLS9lgJNHyBF58KKA2FBEwkD7wog==}
     dev: false
 
   /color@4.2.3:

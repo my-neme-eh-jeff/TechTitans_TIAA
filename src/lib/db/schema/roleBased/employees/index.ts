@@ -32,7 +32,6 @@ export const employee = pgTable("employee", {
   createdAt: timestamp("created_at", { mode: "date", withTimezone: true })
     .notNull()
     .defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 export type SelectEmployee = InferSelectModel<typeof employee>;
 export type InsertEmployee = InferInsertModel<typeof employee>;
@@ -42,4 +41,8 @@ export const employeeRelations = relations(employee, ({ one, many }) => ({
     fields: [employee.companyId],
     references: [company.id],
   }),
+  employeeToUser: one(users, {
+    fields: [employee.userId],
+    references: [users.id],
+  })
 }));

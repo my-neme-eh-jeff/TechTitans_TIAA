@@ -5,12 +5,13 @@ import globeImage from "@/assets/images/globeImage.webp";
 import type { SelectEmployee } from "@/lib/db/schema/roleBased/employees";
 import { Button } from "@nextui-org/button";
 import { Chip } from "@nextui-org/chip";
+import type { SelectUser } from "@/lib/db/schema/roleBased";
 
 type EmployeeDataProps = {
-  Employee: SelectEmployee;
+  currentEmployee: { employee: SelectEmployee; user: SelectUser | null };
 };
 
-export default function EmployeeData({ Employee }: EmployeeDataProps) {
+export default function EmployeeData({ currentEmployee }: EmployeeDataProps) {
   return (
     <>
       <div>
@@ -47,7 +48,7 @@ export default function EmployeeData({ Employee }: EmployeeDataProps) {
                         className="text-secondary-inverse hover:text-primary transition-colors duration-200 ease-in-out font-semibold text-[1.5rem] mr-1"
                         href="javascript:void(0)"
                       >
-                        Aman Nambisan
+                        {currentEmployee.user?.name}
                       </a>
                     </div>
                     <div className="flex flex-wrap pr-2 mb-4 font-medium">
@@ -69,7 +70,7 @@ export default function EmployeeData({ Employee }: EmployeeDataProps) {
                             />
                           </svg>
                         </span>
-                        Mumbai, Maharashtra
+                        {currentEmployee.employee.phoneNumber}
                       </a>
                       <a
                         className="flex items-center mb-2 mr-5 text-secondary-dark hover:text-primary"
@@ -86,7 +87,7 @@ export default function EmployeeData({ Employee }: EmployeeDataProps) {
                             <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z" />
                           </svg>
                         </span>
-                        aman2003nambisan@gmail.com
+                        {currentEmployee.user?.email}
                       </a>
                     </div>
                   </div>
@@ -100,10 +101,7 @@ export default function EmployeeData({ Employee }: EmployeeDataProps) {
                 <div className="flex flex-wrap justify-between">
                   <div className="flex flex-wrap items-center mx-4 gap-x-4">
                     <Chip color="success" variant="shadow">
-                      HR
-                    </Chip>
-                    <Chip color="success" variant="shadow">
-                      Head
+                      {currentEmployee.employee.position}
                     </Chip>
                     <Chip color="success" variant="shadow">
                       3 Years experience
