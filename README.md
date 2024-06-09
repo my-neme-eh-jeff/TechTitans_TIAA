@@ -10,11 +10,15 @@
 </p>
 
 <p align="center">
-  Download the APK or watch the demo video here!
+  **Download the APK or watch the demo video here!**
+</p>
+
+<p align="center">
   <a href="https://drive.google.com/drive/folders/1RFJ4kMnu-BjFI0HOUlPDOoxGEW1JMCIs?usp=sharing">
     <img alt="Download APK" title="Google Drive" src="https://i.imgur.com/fAu5b8V.png" width="100">
   </a>
 </p>
+
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
