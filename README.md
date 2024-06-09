@@ -5,12 +5,12 @@
   </a>
 </p>
 
-<p align="center">
+<p align="center" style="font-size: 24px;">
   <b>Unlocking a Golden Retirement Age.</b>
 </p>
 
-<p align="center">
-  **Download the APK or watch the demo video here!**
+<p align="center" style="font-size: 18px;">
+  <b>Download the APK or watch the demo video here!</b>
 </p>
 
 <p align="center">
