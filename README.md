@@ -5,7 +5,7 @@
   </a>
 </p>
 
-<h2 align="center">Unlocking a Golden Retirement Age.</h2>
+###Unlocking a Golden Retirement Age.
 
 <p align="center" style="font-size: 18px;">
   <b>Download the APK or watch the demo video here!</b>
