@@ -56,10 +56,10 @@ Retiral consists of:
 <p>
 
 
- ### Web [Demo video](https://youtu.be/ni0O-gogq5Q)
+ ### Web 
 
 
-![video](https://github.com/my-neme-eh-jeff/retiral/assets/112639928/357846c3-e194-4b9b-87ba-bf4442e4ccb3)
+https://github.com/my-neme-eh-jeff/retiral/assets/112639928/357846c3-e194-4b9b-87ba-bf4442e4ccb3
 
 ![image](https://github.com/my-neme-eh-jeff/TechTitans_TIAA/assets/113699487/e85597ab-30be-4ebd-9197-182543d89f36)
 
