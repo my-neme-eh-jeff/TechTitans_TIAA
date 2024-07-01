@@ -62,7 +62,7 @@ Retiral consists of:
  <b>Demo video illustrating the features</b>
 </p>
 
-https://github.com/my-neme-eh-jeff/retiral/assets/112639928/5eacfa70-1a73-4409-9eec-a0938496bdaf
+https://github.com/my-neme-eh-jeff/retiral/assets/112639928/a0f98d90-c14c-4f89-bdea-b5ef1c401c90
 
 ![image](https://github.com/my-neme-eh-jeff/TechTitans_TIAA/assets/113699487/e85597ab-30be-4ebd-9197-182543d89f36)
 
