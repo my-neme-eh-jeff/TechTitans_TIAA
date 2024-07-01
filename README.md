@@ -18,8 +18,7 @@
 </p>
 
 <p align="center">
-  <a href="[https://drive.google.com/drive/folders/1RFJ4kMnu-BjFI0HOUlPDOoxGEW1JMCIs?usp=sharing](https://www.canva.com/design/DAFywX7nfQw/l2p-UhrJMBB1z7GFXusksQ/view?utm_content=DAFywX7nfQw&utm_campaign=designshare&utm_medium=link&utm_source=editor
-)">
+  <a href="https://www.canva.com/design/DAFywX7nfQw/l2p-UhrJMBB1z7GFXusksQ/view?utm_content=DAFywX7nfQw&utm_campaign=designshare&utm_medium=link&utm_source=editor">
    Checkout our presentation
   </a>
 </p>
