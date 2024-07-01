@@ -58,8 +58,8 @@ Retiral consists of:
 
  ### Web 
 
-<p align="center">
-Demo video illustrating the features
+<p align="center" style="font-size: 18px;">
+ <b>Demo video illustrating the features</b>
 </p>
 
 https://github.com/my-neme-eh-jeff/retiral/assets/112639928/5eacfa70-1a73-4409-9eec-a0938496bdaf
